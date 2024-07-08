@@ -15,6 +15,7 @@ const UserSchema = new mongoose.Schema({
     password: String,
     name: String,
     surname: String,
+    patronymic: String,
     group: String,
     subjects: [{
         subject: String,

@@ -21,7 +21,7 @@
     <div class="user-cards-container">
         <% users.forEach(user => { %>
         <div class="user-card" onclick="openEditUserPage('<%= user._id %>')">
-            <h3><%= user.name %> <%= user.surname %></h3>
+            <h3><%= user.surname %> <%= user.name[0] %>. <%= user.patronymic[0] %>.</h3>
             <p>Група: <%= user.group %></p>
             <p>Середній бал: <%= user.averageMark %></p>
             <p>Додаткові бали: <%= user.additionalMarks %></p>
