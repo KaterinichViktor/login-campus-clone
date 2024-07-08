@@ -1,35 +1,22 @@
 const express = require("express");
 const path = require("path");
-const mongoose = require("mongoose");
 const { UserCollection, AdminCollection } = require("./src/config");
 const bcrypt = require('bcrypt');
 const session = require('express-session');
-
-require('dotenv').config();
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public"))); // Serve static files from the public directory
 app.set("view engine", "ejs");
 
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: 'your-secret-key',
     resave: false,
     saveUninitialized: true,
 }));
 
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => {
-    console.log("Connected to MongoDB");
-}).catch((error) => {
-    console.error("Error connecting to MongoDB:", error);
-});
-
-// Route to render main page
 app.get("/", async (req, res) => {
     const users = await UserCollection.find({ rating: { $ne: null } }).sort({ rating: -1 }).exec();
     const admin = await AdminCollection.findOne({});
@@ -39,12 +26,10 @@ app.get("/", async (req, res) => {
     res.render("main", { users, isAdmin, isLoggedIn, budgetStudents });
 });
 
-// Route to render login page
 app.get("/login", (req, res) => {
     res.render("login");
 });
 
-// Route to handle login logic
 app.post("/login", async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -78,7 +63,6 @@ app.post("/login", async (req, res) => {
     }
 });
 
-// Route to handle logout logic
 app.get("/logout", (req, res) => {
     req.session.destroy((err) => {
         if (err) {
@@ -88,7 +72,6 @@ app.get("/logout", (req, res) => {
     });
 });
 
-// Route to render profile page
 app.get("/profile", async (req, res) => {
     if (req.session.isAdmin) {
         const users = await UserCollection.find().exec();
@@ -101,7 +84,7 @@ app.get("/profile", async (req, res) => {
     }
 });
 
-// Route to render edit user page
+// Route to serve the edit user page
 app.get("/editUser/:id", async (req, res) => {
     if (!req.session.isAdmin) {
         return res.redirect("/login");
@@ -113,7 +96,7 @@ app.get("/editUser/:id", async (req, res) => {
     res.render("editUser", { user });
 });
 
-// Route to handle updating budget
+
 app.post("/updateBudget", async (req, res) => {
     if (!req.session.isAdmin) {
         return res.status(403).send("Forbidden");
@@ -123,7 +106,7 @@ app.post("/updateBudget", async (req, res) => {
     res.redirect("/");
 });
 
-// Route to render add user page
+
 app.get("/addUser", (req, res) => {
     if (!req.session.isAdmin) {
         return res.redirect("/login");
@@ -135,19 +118,21 @@ app.get("/addUser", (req, res) => {
 function calculateAverageMark(subjects) {
     if (subjects.length === 0) return null; // No subjects, no average
     const totalMarks = subjects.reduce((sum, subject) => {
-        if (subject.mark === undefined || subject.mark === null) return sum + 0;
+        if (!subject.mark) return sum + null;
         return sum + parseFloat(subject.mark);
     }, 0);
-    if (totalMarks === 0) return null; // No marks
+
+    if (totalMarks === null) return null; // Not all subjects have marks
+
     return totalMarks / subjects.length;
 }
 
 // Function to calculate the rating mark
 function calculateRatingMark(averageMark, additionalMarks) {
-    return parseFloat((averageMark * 0.95 + additionalMarks * 0.05).toFixed(2));
+    return Math.round((averageMark * 0.95 + additionalMarks * 0.05) * 100) / 100; // Round to 2 decimal places
 }
 
-// Route to handle editing user
+// Edit User
 app.post("/editUser/:id", async (req, res) => {
     if (!req.session.isAdmin) {
         return res.status(403).send("Forbidden");
@@ -165,6 +150,9 @@ app.post("/editUser/:id", async (req, res) => {
             subjects[index][field] = req.body[key];
         }
     });
+
+    console.log("Received data:", req.body);
+    console.log("Parsed subjects:", subjects);
 
     const user = await UserCollection.findById(req.params.id);
     if (!user) {
@@ -198,7 +186,7 @@ app.post("/editUser/:id", async (req, res) => {
     res.redirect("/profile");
 });
 
-// Route to handle adding user
+// Add User
 app.post("/addUser", async (req, res) => {
     if (!req.session.isAdmin) {
         return res.status(403).send("Forbidden");
@@ -216,6 +204,9 @@ app.post("/addUser", async (req, res) => {
             subjects[index][field] = req.body[key];
         }
     });
+
+    console.log("Received data:", req.body);
+    console.log("Parsed subjects:", subjects);
 
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -243,7 +234,7 @@ app.post("/addUser", async (req, res) => {
     res.redirect("/profile");
 });
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
