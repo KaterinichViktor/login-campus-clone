@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <a href="/">Main</a>
+        <a href="/profile">Profile</a>
+        <% if (isLoggedIn) { %>
+            <a href="/logout">Logout</a>
+        <% } %>
+    </header>
+    <h1>Main Page</h1>
+    <% if (isAdmin) { %>
+        <div id="admin-controls">
+            <form action="/updateBudget" method="post">
+                <input type="number" name="budgetStudents" placeholder="Number of budget students" value="<%= budgetStudents %>" required>
+                <button type="submit">Update Budget</button>
+            </form>
+        </div>
+    <% } %>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Group</th>
+                <th>Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach((user, index) => { %>
+                <tr style="background-color: 
+                    <%= index < Math.ceil(budgetStudents * 0.4) ? 
+                        (index < Math.ceil(budgetStudents * 0.1) ? 'blue' : 'green') : 'white' %>;">
+                    <td><%= user.name %> <%= user.surname %></td>
+                    <td><%= user.group %></td>
+                    <td><%= user.rating %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

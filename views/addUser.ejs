@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <a href="/">Main</a>
+        <a href="/profile">Profile</a>
+        <a href="/logout">Logout</a>
+    </header>
+    <h1>Add User</h1>
+    <form action="/addUser" method="post">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="surname">Surname:</label>
+            <input type="text" id="surname" name="surname" required>
+        </div>
+        <div>
+            <label for="group">Group:</label>
+            <input type="text" id="group" name="group" required>
+        </div>
+        <div>
+            <label for="additionalMarks">Additional Marks:</label>
+            <input type="number" id="additionalMarks" name="additionalMarks" required>
+        </div>
+        <table id="subjects-table">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Teacher</th>
+                    <th>Mark</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" name="subjects[0][subject]" required></td>
+                    <td><input type="text" name="subjects[0][teacher]" required></td>
+                    <td><input type="number" name="subjects[0][mark]" ></td>
+                    <td><button type="button" onclick="removeSubject(this)">Remove</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button" onclick="addSubject()">Add Subject</button>
+        <div>
+            <button type="submit">Add User</button>
+        </div>
+    </form>
+
+    <script>
+        function addSubject() {
+            const table = document.getElementById('subjects-table').getElementsByTagName('tbody')[0];
+            const index = table.children.length;
+            const row = table.insertRow();
+            row.innerHTML = `
+                <td><input type="text" name="subjects[${index}][subject]" required></td>
+                <td><input type="text" name="subjects[${index}][teacher]" required></td>
+                <td><input type="number" name="subjects[${index}][mark]" ></td>
+                <td><button type="button" onclick="removeSubject(this)">Remove</button></td>
+            `;
+        }
+
+        function removeSubject(button) {
+            const row = button.parentElement.parentElement;
+            row.parentElement.removeChild(row);
+        }
+    </script>
+</body>
+</html>
+
+
+
