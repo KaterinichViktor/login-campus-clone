@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Profile</title>
+    <title>Users</title>
     <link rel="stylesheet" href="/style.css">
     <script>
         function openEditUserPage(userId) {
@@ -13,21 +13,21 @@
 </head>
 <body>
     <header>
-        <a href="/">Main</a>
-        <a href="/profile">Profile</a>
-        <a href="/logout">Logout</a>
+        <a href="/">Головна</a>
+        <a href="/profile">Профіль</a>
+        <a href="/logout">Вийти</a>
     </header>
-    <h1>Admin Profile</h1>
+    <h1>Користувачі</h1>
     <div class="user-cards-container">
         <% users.forEach(user => { %>
         <div class="user-card" onclick="openEditUserPage('<%= user._id %>')">
             <h3><%= user.name %> <%= user.surname %></h3>
-            <p>Group: <%= user.group %></p>
-            <p>Rating: <%= user.rating %></p>
+            <p>Група: <%= user.group %></p>
+            <p>Рейтинг: <%= user.rating %></p>
         </div>
         <% }) %>
         <div class="user-card add-user-card" onclick="window.location.href='/addUser'">
-            <a>Add User</a>
+            <a>+</a>
         </div>
     </div>
 </body>

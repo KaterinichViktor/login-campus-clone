@@ -3,48 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add User</title>
+    <title>New user</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <header>
-        <a href="/">Main</a>
-        <a href="/profile">Profile</a>
-        <a href="/logout">Logout</a>
+        <a href="/">Головна</a>
+        <a href="/profile">Профіль</a>
+        <a href="/logout">Вийти</a>
     </header>
-    <h1>Add User</h1>
+    <h1>Новий користувач</h1>
     <form action="/addUser" method="post">
         <div>
-            <label for="username">Username:</label>
+            <label for="username">Логін:</label>
             <input type="text" id="username" name="username" required>
         </div>
         <div>
-            <label for="password">Password:</label>
+            <label for="password">Пароль:</label>
             <input type="password" id="password" name="password" required>
         </div>
         <div>
-            <label for="name">Name:</label>
+            <label for="name">Ім'я:</label>
             <input type="text" id="name" name="name" required>
         </div>
         <div>
-            <label for="surname">Surname:</label>
+            <label for="surname">Прізвище:</label>
             <input type="text" id="surname" name="surname" required>
         </div>
         <div>
-            <label for="group">Group:</label>
+            <label for="group">Група:</label>
             <input type="text" id="group" name="group" required>
         </div>
         <div>
-            <label for="additionalMarks">Additional Marks:</label>
+            <label for="additionalMarks">Додаткові бали:</label>
             <input type="number" id="additionalMarks" name="additionalMarks" required>
         </div>
         <table id="subjects-table">
             <thead>
                 <tr>
-                    <th>Subject</th>
-                    <th>Teacher</th>
-                    <th>Mark</th>
-                    <th>Action</th>
+                    <th>Предмет</th>
+                    <th>Викладач</th>
+                    <th>Оцінка</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -52,13 +52,13 @@
                     <td><input type="text" name="subjects[0][subject]" required></td>
                     <td><input type="text" name="subjects[0][teacher]" required></td>
                     <td><input type="number" name="subjects[0][mark]" ></td>
-                    <td><button type="button" onclick="removeSubject(this)">Remove</button></td>
+                    <td><button type="button" onclick="removeSubject(this)">Видалити</button></td>
                 </tr>
             </tbody>
         </table>
-        <button type="button" onclick="addSubject()">Add Subject</button>
+        <button type="button" onclick="addSubject()">Додати предмет</button>
         <div>
-            <button type="submit">Add User</button>
+            <button type="submit">Додати користувача</button>
         </div>
     </form>
 

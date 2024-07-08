@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
+    <title>Profile</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <header>
-        <a href="/">Main</a>
-        <a href="/profile">Profile</a>
-        <a href="/logout">Logout</a>
+        <a href="/">Головна</a>
+        <a href="/profile">Профіль</a>
+        <a href="/logout">Вийти</a>
     </header>
-    <h1>User Profile</h1>
+    <h1>Мій профіль</h1>
     <div>
-        <p>Name: <%= user.name %> <%= user.surname %></p>
-        <p>Group: <%= user.group %></p>
+        <p>ПІБ: <%= user.name %> <%= user.surname %></p>
+        <p>Група: <%= user.group %></p>
         <table>
             <thead>
                 <tr>
-                    <th>Subject</th>
-                    <th>Teacher</th>
-                    <th>Mark</th>
+                    <th>Предмет</th>
+                    <th>Викладач</th>
+                    <th>Оцінка</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,9 +34,9 @@
                 <% }) %>
             </tbody>
         </table>
-        <p>Average Mark: <%= user.averageMark %></p>
-        <p>Additional Marks: <%= user.additionalMarks %></p>
-        <p>Rating Mark: <%= user.rating %></p>
+        <p>Середній бал: <%= user.averageMark %></p>
+        <p>Додаткові бали: <%= user.additionalMarks %></p>
+        <p>Рейтинг: <%= user.rating %></p>
     </div>
 </body>
 </html>
