@@ -5,75 +5,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit user</title>
     <link rel="stylesheet" href="/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <header>
         <a href="/">Головна</a>
-        <a href="/profile">Профіль</a>
-        <a href="/logout">Вийти</a>
+        <div class="header-profile">
+            <a href="/profile">Профіль</a>
+            <a href="/logout">Вийти</a>
+        </div>
     </header>
-    <h1>Редагувати</h1>
-    <form action="/editUser/<%= user._id %>" method="post">
+    <div class="container">
+        <h1>Редагувати</h1>
+    <form class="user-info-form" action="/editUser/<%= user._id %>" method="post">
         <!-- Other fields here -->
-        <div>
-            <label for="username">Логін:</label>
-            <input type="text" id="username" name="username" value="<%= user.username %>" required>
+        <div class="auth-box">
+            <div class="username-box">
+                <label for="username">Логін</label>
+                <input class="user-info-input" type="text" id="username" name="username" value="<%= user.username %>" required>
+            </div>
+            <div class="password-box">
+                <label for="password">Пароль</label>
+                <input class="user-info-input" type="password" id="password" name="password">
+            </div>
         </div>
-        <div>
-            <label for="password">Пароль (залишити пустим якщо незмінний):</label>
-            <input type="password" id="password" name="password">
+
+        <div class="pib-box">
+            <div class="surname-box">
+                <label for="surname">Прізвище</label>
+                <input class="user-info-input" type="text" id="surname" name="surname" value="<%= user.surname %>" required>
+            </div>
+            <div class="name-box">
+                <label for="name">Ім'я</label>
+                <input class="user-info-input" type="text" id="name" name="name" value="<%= user.name %>" required>
+            </div>
+            <div class="patronymic-box">
+                <label for="name">По батькові</label>
+                <input class="user-info-input" type="text" id="patronymic" name="patronymic" value="<%= user.patronymic %>" required>
+            </div>
         </div>
-        <div>
-            <label for="surname">Прізвище:</label>
-            <input type="text" id="surname" name="surname" value="<%= user.surname %>" required>
+        
+        <div class="group-add-box">
+            <div class="group-box">
+                <label for="group">Група</label>
+                <input class="user-info-input" type="text" id="group" name="group" value="<%= user.group %>" required>
+            </div>
+            <div class="add-marks-box">
+                <label for="additionalMarks">Додаткові бали</label>
+                <input class="user-info-input" type="number" id="additionalMarks" name="additionalMarks" value="<%= user.additionalMarks %>" required>
+            </div>
         </div>
-        <div>
-            <label for="name">Ім'я:</label>
-            <input type="text" id="name" name="name" value="<%= user.name %>" required>
-        </div>
-        <div>
-            <label for="name">По батькові</label>
-            <input type="text" id="patronymic" name="patronymic" value="<%= user.patronymic %>" required>
-        </div>
-        <div>
-            <label for="group">Група:</label>
-            <input type="text" id="group" name="group" value="<%= user.group %>" required>
-        </div>
+
+
         <table id="subjects-table">
             <thead>
                 <tr>
-                    <th>Предмет</th>
-                    <th>Викладач</th>
-                    <th>Оцінка</th>
-                    <th></th>
+                    <th class="subject-head">Предмет</th>
+                    <th class="teacher-head">Викладач</th>
+                    <th class="mark-head">Оцінка</th>
+                    <th class="delete-head"></th>
                 </tr>
             </thead>
             <tbody>
                 <% (user.subjects || []).forEach((subject, index) => { %>
                     <tr>
-                        <td><input type="text" name="subjects[<%= index %>][subject]" value="<%= subject.subject %>" required></td>
-                        <td><input type="text" name="subjects[<%= index %>][teacher]" value="<%= subject.teacher %>" required></td>
-                        <td><input type="number" name="subjects[<%= index %>][mark]" value="<%= subject.mark %>" ></td>
-                        <td><button type="button" onclick="removeSubject(this)">Видалити</button></td>
+                        <td class="subject-column"><input class="subjects-input" type="text" name="subjects[<%= index %>][subject]" value="<%= subject.subject %>" required></td>
+                        <td class="teacher-column"><input class="subjects-input" type="text" name="subjects[<%= index %>][teacher]" value="<%= subject.teacher %>" required></td>
+                        <td class="mark-column"><input class="subjects-input" type="number" name="subjects[<%= index %>][mark]" value="<%= subject.mark %>" ></td>
+                        <td class="delete-column"><button class="delete-subject-btn" type="button" onclick="removeSubject(this)"><i class="fa">&#xf014;</i></button></td>
                     </tr>
                 <% }) %>
             </tbody>
         </table>
-        <button type="button" onclick="addSubject()">Додати предмет</button>
 
-        <div>
-            <label for="additionalMarks">Додаткові бали:</label>
-            <input type="number" id="additionalMarks" name="additionalMarks" value="<%= user.additionalMarks %>" required>
+        <button class="add-subject-btn" type="button" onclick="addSubject()">&#10010;</button>
+
+        <div class="avg-rating-box">
+            <p>Середній бал: <b><%= user.averageMark %></b></p>
+
+            <p>Рейтинг: <b><%= user.rating %></b></p>
         </div>
-        
-        <p>Середній бал: <%= user.averageMark %></p>
 
-        <p>Рейтинг: <%= user.rating %></p>
+        <button class="update-btn" type="submit">Зберегти</button>
 
-        <div>
-            <button type="submit">Оновити</button>
-        </div>
     </form>
+    </div>
     
     <script>
         function addSubject() {
@@ -81,10 +102,10 @@
             const index = table.children.length;
             const row = table.insertRow();
             row.innerHTML = `
-                <td><input type="text" name="subjects[${index}][subject]" required></td>
-                <td><input type="text" name="subjects[${index}][teacher]" required></td>
-                <td><input type="number" name="subjects[${index}][mark]" ></td>
-                <td><button type="button" onclick="removeSubject(this)">Remove</button></td>
+                <td class="subject-column"><input class="subjects-input" type="text" name="subjects[${index}][subject]" required></td>
+                <td class="teacher-column"><input class="subjects-input" type="text" name="subjects[${index}][teacher]" required></td>
+                <td class="mark-column"><input class="subjects-input" type="number" name="subjects[${index}][mark]" ></td>
+                <td class="delete-column"><button class="delete-subject-btn" type="button" onclick="removeSubject(this)"><i class="fa">&#xf014;</i></button></td>
             `;
         }
     

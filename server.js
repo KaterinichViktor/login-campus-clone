@@ -1,8 +1,10 @@
+require('dotenv').config();
 const express = require("express");
 const path = require("path");
 const { UserCollection, AdminCollection } = require("./src/config");
 const bcrypt = require('bcrypt');
 const session = require('express-session');
+const crypto = require('crypto');
 
 const app = express();
 
@@ -33,30 +35,29 @@ app.get("/login", (req, res) => {
 app.post("/login", async (req, res) => {
     try {
         const { username, password } = req.body;
-        const admin = await AdminCollection.findOne({ username });
+        const secretWord = process.env.SECRET_WORD;
+        const loginString = `${username}:${password}:${secretWord}`;
+        const hashedLoginString = crypto.createHash('sha256').update(loginString).digest('hex');
 
+        // Check if the hashed login string matches the stored hash
+        const admin = await AdminCollection.findOne({ loginString: hashedLoginString });
         if (admin) {
-            const isPasswordMatch = await bcrypt.compare(password, admin.password);
-            if (isPasswordMatch) {
-                req.session.isAdmin = true;
-                req.session.isUser = false;
-                req.session.username = username;
-                res.redirect("/");
-                return;
-            }
-        } else {
-            const user = await UserCollection.findOne({ username });
-            if (user) {
-                const isPasswordMatch = await bcrypt.compare(password, user.password);
-                if (isPasswordMatch) {
-                    req.session.isUser = true;
-                    req.session.isAdmin = false;
-                    req.session.username = username;
-                    res.redirect("/");
-                    return;
-                }
-            }
+            req.session.isAdmin = true;
+            req.session.isUser = false;
+            req.session.username = username;
+            res.redirect("/");
+            return;
         }
+
+        const user = await UserCollection.findOne({ loginString: hashedLoginString });
+        if (user) {
+            req.session.isUser = true;
+            req.session.isAdmin = false;
+            req.session.username = username;
+            res.redirect("/");
+            return;
+        }
+
         res.send("Invalid username or password");
     } catch (error) {
         res.status(500).send("Internal Server Error");
@@ -96,7 +97,6 @@ app.get("/editUser/:id", async (req, res) => {
     res.render("editUser", { user });
 });
 
-
 app.post("/updateBudget", async (req, res) => {
     if (!req.session.isAdmin) {
         return res.status(403).send("Forbidden");
@@ -105,7 +105,6 @@ app.post("/updateBudget", async (req, res) => {
     await AdminCollection.updateOne({ username: req.session.username }, { budgetStudents: newBudget });
     res.redirect("/");
 });
-
 
 app.get("/addUser", (req, res) => {
     if (!req.session.isAdmin) {
@@ -138,7 +137,7 @@ app.post("/editUser/:id", async (req, res) => {
         return res.status(403).send("Forbidden");
     }
 
-    const { username, password, name, surname, group, additionalMarks } = req.body;
+    const { username, password, name, surname, patronymic, group, additionalMarks } = req.body;
 
     let subjects = [];
     Object.keys(req.body).forEach(key => {
@@ -151,20 +150,25 @@ app.post("/editUser/:id", async (req, res) => {
         }
     });
 
-    // console.log("Received data:", req.body);
-    // console.log("Parsed subjects:", subjects);
-
     const user = await UserCollection.findById(req.params.id);
     if (!user) {
         return res.status(404).send("User not found");
     }
 
-    user.username = username;
     user.name = name;
     user.surname = surname;
+    user.patronymic = patronymic;
     user.group = group;
     user.additionalMarks = additionalMarks;
     user.subjects = subjects;
+
+    if (username !== user.username || password) {
+        const secretWord = process.env.SECRET_WORD;
+        const loginString = `${username}:${password}:${secretWord}`;
+        const hashedLoginString = crypto.createHash('sha256').update(loginString).digest('hex');
+        user.loginString = hashedLoginString;
+        // user.username = hashedLoginString;
+    }
 
     if (password) {
         const saltRounds = 10;
@@ -192,7 +196,7 @@ app.post("/addUser", async (req, res) => {
         return res.status(403).send("Forbidden");
     }
 
-    const { username, password, name, surname, group, additionalMarks } = req.body;
+    const { username, password, name, surname, patronymic, group, additionalMarks } = req.body;
 
     let subjects = [];
     Object.keys(req.body).forEach(key => {
@@ -205,11 +209,12 @@ app.post("/addUser", async (req, res) => {
         }
     });
 
-    // console.log("Received data:", req.body);
-    // console.log("Parsed subjects:", subjects);
-
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    const secretWord = process.env.SECRET_WORD;
+    const loginString = `${username}:${password}:${secretWord}`;
+    const hashedLoginString = crypto.createHash('sha256').update(loginString).digest('hex');
 
     // Calculate average and rating marks
     const averageMark = calculateAverageMark(subjects);
@@ -219,10 +224,12 @@ app.post("/addUser", async (req, res) => {
     }
 
     const newUser = new UserCollection({
-        username,
+        loginString: hashedLoginString, // Store the hashed login string
+        username: username,
         password: hashedPassword,
         name,
         surname,
+        patronymic,
         group,
         subjects,
         additionalMarks,

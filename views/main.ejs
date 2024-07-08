@@ -5,32 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main</title>
     <link rel="stylesheet" href="/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <header>
         <a href="/">Головна</a>
-        <a href="/profile">Профіль</a>
-        <% if (isLoggedIn) { %>
-            <a href="/logout">Вийти</a>
-        <% } %>
+        <div class="header-profile">
+            <a href="/profile">Профіль</a>
+            <% if (isLoggedIn) { %>
+                <a href="/logout">Вийти</a>
+            <% } %>
+        </div>
     </header>
-    <h1>Рейтинг успішності</h1>
+    <div class="container">
+        <h1>Рейтинг успішності</h1>
     <% if (isAdmin) { %>
         <div id="admin-controls">
-            <form action="/updateBudget" method="post">
-                <input type="number" name="budgetStudents" placeholder="Number of budget students" value="<%= budgetStudents %>" required>
-                <button type="submit">Оновити</button>
+            <form action="/updateBudget" method="post" class="admin-controls-from">
+                <input class="students-number-input" type="number" name="budgetStudents" placeholder="Number of budget students" value="<%= budgetStudents %>" required>
+                <button class="students-number-btn" type="submit">Оновити</button>
             </form>
         </div>
     <% } %>
     <table>
         <thead>
             <tr>
-                <th>ПІБ</th>
-                <th>Група</th>
-                <th>Середній бал</th>
-                <th>Додаткові бали</th>
-                <th>Рейтинг</th>
+                <th class="index-head">№</th>
+                <th class="pib-head">ПІБ</th>
+                <th class="group-head">Група</th>
+                <th class="avg-head">Середній бал</th>
+                <th class="add-head">Додаткові бали</th>
+                <th class="rating-head">Рейтинг</th>
             </tr>
         </thead>
         <tbody>
@@ -38,15 +47,17 @@
                 <tr style="background-color: 
                     <%= index < Math.ceil(budgetStudents * 0.4) ? 
                         (index < Math.ceil(budgetStudents * 0.1) ? 'rgba(10,137,239,0.6)' : 'rgba(61,178,50,0.6)') : 'rgba(243,244,245,0.6)' %>;">
-                    <td><%= user.name %> <%= user.surname %> <%= user.patronymic %></td>
-                    <td><%= user.group %></td>
-                    <td><%= user.averageMark %></td>
-                    <td><%= user.additionalMarks %></td>
-                    <td><%= user.rating %></td>
+                    <td class="index-column"><%= index + 1 %></td>
+                    <td class="pib-column"><%= user.surname %> <%= user.name %> <%= user.patronymic %></td>
+                    <td class="group-column"><%= user.group %></td>
+                    <td class="avg-column"><%= user.averageMark %></td>
+                    <td class="add-column"><%= user.additionalMarks %></td>
+                    <td class="rating-column"><%= user.rating %></td>
                 </tr>
             <% }) %>
 
         </tbody>
     </table>
+    </div>
 </body>
 </html>

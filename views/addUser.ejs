@@ -5,66 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New user</title>
     <link rel="stylesheet" href="/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <header>
         <a href="/">Головна</a>
-        <a href="/profile">Профіль</a>
-        <a href="/logout">Вийти</a>
+        <div class="header-profile">
+            <a href="/profile">Профіль</a>
+            <a href="/logout">Вийти</a>
+        </div>
     </header>
-    <h1>Новий користувач</h1>
-    <form action="/addUser" method="post">
-        <div>
-            <label for="username">Логін:</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div>
-            <label for="password">Пароль:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div>
-            <label for="surname">Прізвище:</label>
-            <input type="text" id="surname" name="surname" required>
-        </div>
-        <div>
-            <label for="name">Ім'я:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-        <div>
-            <label for="name">По батькові</label>
-            <input type="text" id="patronymic" name="patronymic" required>
-        </div>
-        <div>
-            <label for="group">Група:</label>
-            <input type="text" id="group" name="group" required>
-        </div>
-        <div>
-            <label for="additionalMarks">Додаткові бали:</label>
-            <input type="number" id="additionalMarks" name="additionalMarks" required>
-        </div>
-        <table id="subjects-table">
-            <thead>
-                <tr>
-                    <th>Предмет</th>
-                    <th>Викладач</th>
-                    <th>Оцінка</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><input type="text" name="subjects[0][subject]" required></td>
-                    <td><input type="text" name="subjects[0][teacher]" required></td>
-                    <td><input type="number" name="subjects[0][mark]" ></td>
-                    <td><button type="button" onclick="removeSubject(this)">Видалити</button></td>
-                </tr>
-            </tbody>
-        </table>
-        <button type="button" onclick="addSubject()">Додати предмет</button>
-        <div>
-            <button type="submit">Додати користувача</button>
-        </div>
-    </form>
+    <div class="container">
+        <h1>Новий користувач</h1>
+        <form class="user-info-form" action="/addUser" method="post">
+            <div class="auth-box">
+                <div class="username-box">
+                    <label for="username">Логін:</label>
+                    <input class="user-info-input" type="text" id="username" name="username" required>
+                </div>
+                <div class="password-box">
+                    <label for="password">Пароль:</label>
+                    <input class="user-info-input" type="password" id="password" name="password" required>
+                </div>
+            </div>
+
+            <div class="pib-box">
+                <div class="surname-box">
+                    <label for="surname">Прізвище:</label>
+                    <input class="user-info-input" type="text" id="surname" name="surname" required>
+                </div>
+                <div class="name-box">
+                    <label for="name">Ім'я:</label>
+                    <input class="user-info-input" type="text" id="name" name="name" required>
+                </div>
+                <div class="patronymic-box">
+                    <label for="name">По батькові</label>
+                    <input class="user-info-input" type="text" id="patronymic" name="patronymic" required>
+                </div>
+            </div>
+            
+            <div class="group-add-box">
+                <div class="group-box">
+                    <label for="group">Група:</label>
+                    <input class="user-info-input" type="text" id="group" name="group" required>
+                </div>
+                <div class="add-marks-box">
+                    <label for="additionalMarks">Додаткові бали:</label>
+                    <input class="user-info-input" type="number" id="additionalMarks" name="additionalMarks" required>
+                </div>
+            </div>
+            
+            <table id="subjects-table">
+                <thead>
+                    <tr>
+                        <th class="subject-head">Предмет</th>
+                        <th class="teacher-head">Викладач</th>
+                        <th class="mark-head">Оцінка</th>
+                        <th class="delete-head"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="subject-column"><input class="subjects-input" type="text" name="subjects[0][subject]" required></td>
+                        <td class="teacher-column"><input class="subjects-input" type="text" name="subjects[0][teacher]" required></td>
+                        <td class="mark-column"><input class="subjects-input" type="number" name="subjects[0][mark]" ></td>
+                        <td class="delete-column"><button class="delete-subject-btn" type="button" onclick="removeSubject(this)"><i class="fa">&#xf014;</i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button class="add-subject-btn" type="button" onclick="addSubject()">&#10010;</button>
+
+            <button class="update-btn" type="submit">Зберегти</button>
+
+        </form>
+    </div>
 
     <script>
         function addSubject() {
@@ -72,10 +92,10 @@
             const index = table.children.length;
             const row = table.insertRow();
             row.innerHTML = `
-                <td><input type="text" name="subjects[${index}][subject]" required></td>
-                <td><input type="text" name="subjects[${index}][teacher]" required></td>
-                <td><input type="number" name="subjects[${index}][mark]" ></td>
-                <td><button type="button" onclick="removeSubject(this)">Remove</button></td>
+                <td class="subject-column"><input class="subjects-input" type="text" name="subjects[${index}][subject]" required></td>
+                <td class="teacher-column"><input class="subjects-input" type="text" name="subjects[${index}][teacher]" required></td>
+                <td class="mark-column"><input class="subjects-input" type="number" name="subjects[${index}][mark]" ></td>
+                <td class="delete-column"><button class="delete-subject-btn" type="button" onclick="removeSubject(this)"><i class="fa">&#xf014;</i></button></td>
             `;
         }
 

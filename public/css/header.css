@@ -1,0 +1,23 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: rgb(53, 176, 162);
+    /* margin-bottom: 40PX; */
+    color: white;
+  }
+  
+  header a {
+
+    font-family: inherit;
+    font-size: 24px;
+
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+  }
+
+  .header-profile a{
+    margin-left: 20px;
+
+  }

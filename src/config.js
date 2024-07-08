@@ -11,6 +11,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 const UserSchema = new mongoose.Schema({
+    loginString: String,
     username: String,
     password: String,
     name: String,
@@ -28,6 +29,7 @@ const UserSchema = new mongoose.Schema({
 });
 
 const AdminSchema = new mongoose.Schema({
+    loginString: String,
     username: String,
     password: String,
     budgetStudents: Number

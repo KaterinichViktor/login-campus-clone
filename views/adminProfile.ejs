@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Users</title>
     <link rel="stylesheet" href="/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
     <script>
         function openEditUserPage(userId) {
             window.location.href = '/editUser/' + userId;
@@ -14,23 +19,27 @@
 <body>
     <header>
         <a href="/">Головна</a>
-        <a href="/profile">Профіль</a>
-        <a href="/logout">Вийти</a>
+        <div class="header-profile">
+            <a href="/profile">Профіль</a>
+            <a href="/logout">Вийти</a>
+        </div>
     </header>
-    <h1>Користувачі</h1>
-    <div class="user-cards-container">
-        <% users.forEach(user => { %>
-        <div class="user-card" onclick="openEditUserPage('<%= user._id %>')">
-            <h3><%= user.surname %> <%= user.name[0] %>. <%= user.patronymic[0] %>.</h3>
-            <p>Група: <%= user.group %></p>
-            <p>Середній бал: <%= user.averageMark %></p>
-            <p>Додаткові бали: <%= user.additionalMarks %></p>
-            <p>Рейтинг: <%= user.rating %></p>
+    <div class="container">
+        <h1>Користувачі</h1>
+        <div class="user-cards-container">
+            <% users.forEach(user => { %>
+            <div class="user-card" onclick="openEditUserPage('<%= user._id %>')">
+                <h3><%= user.surname %> <%= user.name[0] %>. <%= user.patronymic[0] %>.</h3>
+                <p class="user-card-txt">Група: <b><%= user.group %></b></p>
+                <p class="user-card-txt">Середній бал: <b><%= user.averageMark %></b></p>
+                <p class="user-card-txt">Додаткові бали: <b><%= user.additionalMarks %></b></p>
+                <p class="user-card-txt">Рейтинг: <b><%= user.rating %></b></p>
+            </div>
+            <% }) %>
+            <div class="user-card add-user-card" onclick="window.location.href='/addUser'">
+                <a>+</a>
+            </div>
         </div>
-        <% }) %>
-        <div class="user-card add-user-card" onclick="window.location.href='/addUser'">
-            <a>+</a>
-        </div>
-    </div>
+    </div> 
 </body>
 </html>
