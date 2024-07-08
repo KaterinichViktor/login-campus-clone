@@ -28,6 +28,8 @@
             <tr>
                 <th>ПІБ</th>
                 <th>Група</th>
+                <th>Середній бал</th>
+                <th>Додаткові бали</th>
                 <th>Рейтинг</th>
             </tr>
         </thead>
@@ -38,6 +40,8 @@
                         (index < Math.ceil(budgetStudents * 0.1) ? 'rgba(10,137,239,0.6)' : 'rgba(61,178,50,0.6)') : 'rgba(243,244,245,0.6)' %>;">
                     <td><%= user.name %> <%= user.surname %></td>
                     <td><%= user.group %></td>
+                    <td><%= user.averageMark %></td>
+                    <td><%= user.additionalMarks %></td>
                     <td><%= user.rating %></td>
                 </tr>
             <% }) %>

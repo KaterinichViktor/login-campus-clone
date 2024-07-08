@@ -124,7 +124,7 @@ function calculateAverageMark(subjects) {
 
     if (totalMarks === null) return null; // Not all subjects have marks
 
-    return totalMarks / subjects.length;
+    return Math.round((totalMarks / subjects.length) * 100) / 100; // Round to 2 decimal places
 }
 
 // Function to calculate the rating mark
@@ -151,8 +151,8 @@ app.post("/editUser/:id", async (req, res) => {
         }
     });
 
-    console.log("Received data:", req.body);
-    console.log("Parsed subjects:", subjects);
+    // console.log("Received data:", req.body);
+    // console.log("Parsed subjects:", subjects);
 
     const user = await UserCollection.findById(req.params.id);
     if (!user) {
@@ -205,8 +205,8 @@ app.post("/addUser", async (req, res) => {
         }
     });
 
-    console.log("Received data:", req.body);
-    console.log("Parsed subjects:", subjects);
+    // console.log("Received data:", req.body);
+    // console.log("Parsed subjects:", subjects);
 
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
