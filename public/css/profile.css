@@ -1,0 +1,11 @@
+.user-info-txt{
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.user-info-txt b{
+    font-size: 24px;
+    margin-left: 5px;
+    color: rgb(39, 132, 121);
+}

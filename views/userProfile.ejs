@@ -13,34 +13,39 @@
 <body>
     <header>
         <a href="/">Головна</a>
-        <a href="/profile">Профіль</a>
-        <a href="/logout">Вийти</a>
+        <div class="header-profile">
+            <a href="/profile">Профіль</a>
+            <a href="/logout">Вийти</a>
+        </div>
     </header>
-    <h1>Мій профіль</h1>
-    <div>
-        <p>ПІБ: <%= user.name %> <%= user.surname %> <%= user.patronymic %></p>
-        <p>Група: <%= user.group %></p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Предмет</th>
-                    <th>Викладач</th>
-                    <th>Оцінка</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% user.subjects.forEach(subject => { %>
+    <div class="container">
+        <h1>Мій профіль</h1>
+        <div>
+            <p class="user-info-txt">ПІБ: <b><%= user.surname %> <%= user.name %> <%= user.patronymic %></b></p>
+            <p class="user-info-txt">Група: <b><%= user.group %></b></p>
+            <p class="user-info-txt">Додаткові бали: <b><%= user.additionalMarks %></b></p>
+            <table>
+                <thead>
                     <tr>
-                        <td><%= subject.subject %></td>
-                        <td><%= subject.teacher %></td>
-                        <td><%= subject.mark %></td>
+                        <th class="subject-head">Предмет</th>
+                        <th class="teacher-head">Викладач</th>
+                        <th class="mark-head">Оцінка</th>
                     </tr>
-                <% }) %>
-            </tbody>
-        </table>
-        <p>Середній бал: <%= user.averageMark %></p>
-        <p>Додаткові бали: <%= user.additionalMarks %></p>
-        <p>Рейтинг: <%= user.rating %></p>
+                </thead>
+                <tbody>
+                    <% user.subjects.forEach(subject => { %>
+                        <tr>
+                            <td class="subject-column"><%= subject.subject %></td>
+                            <td class="teacher-column"><%= subject.teacher %></td>
+                            <td class="mark-column"><%= subject.mark %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            <p class="user-info-txt">Середній бал: <b><%= user.averageMark %></b></p>
+    
+            <p class="user-info-txt">Рейтинг: <b><%= user.rating %></b></p>
+        </div>
     </div>
 </body>
 </html>
