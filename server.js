@@ -76,7 +76,8 @@ app.get("/logout", (req, res) => {
 app.get("/profile", async (req, res) => {
     if (req.session.isAdmin) {
         const users = await UserCollection.find().exec();
-        res.render("adminProfile", { users });
+        const admins = await AdminCollection.find().exec(); // Fetch admins from the database
+        res.render("adminProfile", { users, admins }); // Pass admins to the template
     } else if (req.session.isUser) {
         const user = await UserCollection.findOne({ username: req.session.username }).exec();
         res.render("userProfile", { user });
@@ -84,6 +85,7 @@ app.get("/profile", async (req, res) => {
         res.redirect("/login");
     }
 });
+
 
 // Route to serve the edit user page
 app.get("/editUser/:id", async (req, res) => {
@@ -102,7 +104,8 @@ app.post("/updateBudget", async (req, res) => {
         return res.status(403).send("Forbidden");
     }
     const newBudget = parseInt(req.body.budgetStudents, 10);
-    await AdminCollection.updateOne({ username: req.session.username }, { budgetStudents: newBudget });
+    // await AdminCollection.updateOne({ username: req.session.username }, { budgetStudents: newBudget });
+    await AdminCollection.updateOne({}, { budgetStudents: newBudget });
     res.redirect("/");
 });
 
@@ -240,6 +243,71 @@ app.post("/addUser", async (req, res) => {
     await newUser.save();
     res.redirect("/profile");
 });
+
+
+
+
+// Edit Admin
+app.post("/editAdmin/:id", async (req, res) => {
+    if (!req.session.isAdmin) {
+        return res.status(403).send("Forbidden");
+    }
+
+    const { username, password } = req.body;
+    const admin = await AdminCollection.findById(req.params.id);
+    if (!admin) {
+        return res.status(404).send("Admin not found");
+    }
+
+    const secretWord = process.env.SECRET_WORD;
+    const loginString = `${username}:${password}:${secretWord}`;
+    const hashedLoginString = crypto.createHash('sha256').update(loginString).digest('hex');
+
+    admin.username = username;
+    admin.loginString = hashedLoginString;
+
+    await admin.save();
+    res.redirect("/");
+});
+
+
+// Add Admin
+app.post("/addAdmin", async (req, res) => {
+    if (!req.session.isAdmin) {
+        return res.status(403).send("Forbidden");
+    }
+
+    const { username, password } = req.body;
+
+    const secretWord = process.env.SECRET_WORD;
+    const loginString = `${username}:${password}:${secretWord}`;
+    const hashedLoginString = crypto.createHash('sha256').update(loginString).digest('hex');
+
+    const newAdmin = new AdminCollection({
+        username: username,
+        loginString: hashedLoginString, // Store the hashed login string
+    });
+
+    await newAdmin.save();
+    res.redirect("/");
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
