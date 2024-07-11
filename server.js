@@ -245,8 +245,6 @@ app.post("/addUser", async (req, res) => {
 });
 
 
-
-
 // Edit Admin
 app.post("/editAdmin/:id", async (req, res) => {
     if (!req.session.isAdmin) {
@@ -289,25 +287,28 @@ app.post("/addAdmin", async (req, res) => {
     });
 
     await newAdmin.save();
-    res.redirect("/");
+    res.redirect("/profile");
 });
 
+app.post("/deleteAdmin/:id", async (req, res) => {
+    if (!req.session.isAdmin) {
+        return res.status(403).send("Forbidden");
+    }
 
+    await AdminCollection.findByIdAndDelete(req.params.id);
+    res.redirect("/profile");
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.post('/deleteUser/:id', async (req, res) => {
+    try {
+        const userId = req.params.id;
+        await UserCollection.findByIdAndDelete(userId);
+        res.redirect('/profile'); // Redirect to the admin profile page after deletion
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error deleting user');
+    }
+});
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {

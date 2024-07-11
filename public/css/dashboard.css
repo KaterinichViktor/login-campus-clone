@@ -21,14 +21,69 @@
     padding: 30px;
     margin: 10px;
     width: calc(25% - 20px);
+    height: 320px;
     box-sizing: border-box;
 
-    font-size: 20px;
+    /* font-size: 20px; */
 
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    position: relative;
   } 
+
+  .admin-info-form label{
+    display: flex;
+    font-family: inherit;
+    font-size: 20px;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+  .admin-info-form input{
+    width: 100%;
+    margin-bottom: 15px;
+    height: 40px;
+    font-size: 20px;
+    padding: 10px;
+
+    border: 2px solid rgb(53, 176, 162);
+    border-radius: 10px;
+    font-family: inherit;
+    outline: none;
+  }
+
+
+  .admin-safe-btn{
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    width: 80px;
+    height: 40px;
+    font-size: 20px;
+    font-family: inherit;
+    border: none;
+    background-color: rgb(53, 176, 162);
+    cursor: pointer;
+    color: white;
+    border-radius: 10px;
+  }
+  .admin-safe-btn:hover{
+    background-color: rgb(39, 132, 121);
+}
+  .admin-delete-btn{
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    width: 40px;
+    height: 40px;
+    font-size: 32px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  .admin-delete-btn:hover{
+    color: red;
+  }
   
   .user-card {
     background-color: rgba(94, 197, 171, 0.05);
@@ -38,6 +93,7 @@
     padding: 30px;
     margin: 10px;
     width: calc(20% - 20px);
+    height: 320px;
     box-sizing: border-box;
     cursor: pointer;
 
@@ -49,7 +105,7 @@
   }
   .user-card h3{
     align-self: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     /* font-size: 24px; */
   }
 

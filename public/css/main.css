@@ -22,16 +22,14 @@
     margin-left: 40px;
     box-sizing: border-box;
     background-color: rgb(53, 176, 162);
-    width: 80px;
+    width: 100px;
     height: 40px;
     border: none;
     border-radius: 10px;
     color: white;
-
     font-family: inherit;
     font-weight: 700;
-    font-size: 16px;
-
+    font-size: 20px;
     cursor: pointer;
 }
 .students-number-btn:hover{
@@ -45,11 +43,9 @@ table {
     font-size: 18px;
 }
 
-/* th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-} */
+th, td {
+    font-size: 20px;
+}
 
 .pib-column{
 
