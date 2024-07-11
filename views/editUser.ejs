@@ -22,78 +22,79 @@
     </header>
     <div class="container">
         <h1>Редагувати</h1>
-    <form class="user-info-form" action="/editUser/<%= user._id %>" method="post">
-        <!-- Other fields here -->
-        <div class="auth-box">
-            <div class="username-box">
-                <label for="username">Логін</label>
-                <input class="user-info-input" type="text" id="username" name="username" value="<%= user.username %>" required>
+        <form class="user-info-form" action="/editUser/<%= user._id %>" method="post">
+            <!-- Other fields here -->
+            <div class="auth-box">
+                <div class="username-box">
+                    <label for="username">Логін</label>
+                    <input class="user-info-input" type="text" id="username" name="username" value="<%= user.username %>" required>
+                </div>
+                <div class="password-box">
+                    <label for="password">Пароль</label>
+                    <input class="user-info-input" type="password" id="password" name="password">
+                </div>
             </div>
-            <div class="password-box">
-                <label for="password">Пароль</label>
-                <input class="user-info-input" type="password" id="password" name="password">
-            </div>
-        </div>
 
-        <div class="pib-box">
-            <div class="surname-box">
-                <label for="surname">Прізвище</label>
-                <input class="user-info-input" type="text" id="surname" name="surname" value="<%= user.surname %>" required>
+            <div class="pib-box">
+                <div class="surname-box">
+                    <label for="surname">Прізвище</label>
+                    <input class="user-info-input" type="text" id="surname" name="surname" value="<%= user.surname %>" required>
+                </div>
+                <div class="name-box">
+                    <label for="name">Ім'я</label>
+                    <input class="user-info-input" type="text" id="name" name="name" value="<%= user.name %>" required>
+                </div>
+                <div class="patronymic-box">
+                    <label for="patronymic">По батькові</label>
+                    <input class="user-info-input" type="text" id="patronymic" name="patronymic" value="<%= user.patronymic %>" required>
+                </div>
             </div>
-            <div class="name-box">
-                <label for="name">Ім'я</label>
-                <input class="user-info-input" type="text" id="name" name="name" value="<%= user.name %>" required>
+            
+            <div class="group-add-box">
+                <div class="group-box">
+                    <label for="group">Група</label>
+                    <input class="user-info-input" type="text" id="group" name="group" value="<%= user.group %>" required>
+                </div>
+                <div class="add-marks-box">
+                    <label for="additionalMarks">Додаткові бали</label>
+                    <input class="user-info-input" type="number" id="additionalMarks" name="additionalMarks" value="<%= user.additionalMarks %>" required>
+                </div>
             </div>
-            <div class="patronymic-box">
-                <label for="name">По батькові</label>
-                <input class="user-info-input" type="text" id="patronymic" name="patronymic" value="<%= user.patronymic %>" required>
-            </div>
-        </div>
-        
-        <div class="group-add-box">
-            <div class="group-box">
-                <label for="group">Група</label>
-                <input class="user-info-input" type="text" id="group" name="group" value="<%= user.group %>" required>
-            </div>
-            <div class="add-marks-box">
-                <label for="additionalMarks">Додаткові бали</label>
-                <input class="user-info-input" type="number" id="additionalMarks" name="additionalMarks" value="<%= user.additionalMarks %>" required>
-            </div>
-        </div>
 
-
-        <table id="subjects-table">
-            <thead>
-                <tr>
-                    <th class="subject-head">Предмет</th>
-                    <th class="teacher-head">Викладач</th>
-                    <th class="mark-head">Оцінка</th>
-                    <th class="delete-head"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <% (user.subjects || []).forEach((subject, index) => { %>
+            <table id="subjects-table">
+                <thead>
                     <tr>
-                        <td class="subject-column"><input class="subjects-input" type="text" name="subjects[<%= index %>][subject]" value="<%= subject.subject %>" required></td>
-                        <td class="teacher-column"><input class="subjects-input" type="text" name="subjects[<%= index %>][teacher]" value="<%= subject.teacher %>" required></td>
-                        <td class="mark-column"><input class="subjects-input" type="number" name="subjects[<%= index %>][mark]" value="<%= subject.mark %>" ></td>
-                        <td class="delete-column"><button class="delete-subject-btn" type="button" onclick="removeSubject(this)"><i class="fa">&#xf014;</i></button></td>
+                        <th class="subject-head">Предмет</th>
+                        <th class="teacher-head">Викладач</th>
+                        <th class="mark-head">Оцінка</th>
+                        <th class="delete-head"></th>
                     </tr>
-                <% }) %>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <% (user.subjects || []).forEach((subject, index) => { %>
+                        <tr>
+                            <td class="subject-column"><input class="subjects-input" type="text" name="subjects[<%= index %>][subject]" value="<%= subject.subject %>" required></td>
+                            <td class="teacher-column"><input class="subjects-input" type="text" name="subjects[<%= index %>][teacher]" value="<%= subject.teacher %>" required></td>
+                            <td class="mark-column"><input class="subjects-input" type="number" name="subjects[<%= index %>][mark]" value="<%= subject.mark %>" ></td>
+                            <td class="delete-column"><button class="delete-subject-btn" type="button" onclick="removeSubject(this)"><i class="fa">&#xf014;</i></button></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
 
-        <button class="add-subject-btn" type="button" onclick="addSubject()">&#10010;</button>
+            <button class="add-subject-btn" type="button" onclick="addSubject()">&#10010;</button>
 
-        <div class="avg-rating-box">
-            <p>Середній бал: <b><%= user.averageMark %></b></p>
+            <div class="avg-rating-box">
+                <p>Середній бал: <b><%= user.averageMark %></b></p>
+                <p>Рейтинг: <b><%= user.rating %></b></p>
+            </div>
 
-            <p>Рейтинг: <b><%= user.rating %></b></p>
-        </div>
+            <button class="update-btn" type="submit">Зберегти</button>
+        </form>
 
-        <button class="update-btn" type="submit">Зберегти</button>
-
-    </form>
+        <form class="delete-user-form" action="/deleteUser/<%= user._id %>" method="post">
+            <button class="delete-user-btn" type="submit">Видалити</button>
+        </form>
     </div>
     
     <script>
@@ -108,16 +109,11 @@
                 <td class="delete-column"><button class="delete-subject-btn" type="button" onclick="removeSubject(this)"><i class="fa">&#xf014;</i></button></td>
             `;
         }
-    
+
         function removeSubject(button) {
             const row = button.parentElement.parentElement;
             row.parentElement.removeChild(row);
         }
     </script>
-    
-    
 </body>
 </html>
-
-
-
