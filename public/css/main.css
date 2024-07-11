@@ -5,6 +5,31 @@
 .admin-controls-from{
     display: flex;
 }
+.faculty-buttons{
+    display: flex;
+    height: 40px;
+    margin-bottom: 20px;
+}
+.faculty-buttons button{
+    height: 100%;
+    margin: 0;
+    width: calc(100% / 11);
+    border: 1px solid white;
+    background-color:#f2f2f2;
+    font-size: 20px;
+    font-family: inherit;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.faculty-buttons button:hover{
+    background-color: #bbb;
+}
+
+.faculty-buttons button.active{
+    background-color:rgb(53, 176, 162);
+}
 
 .students-number-input{
     width: 200px;
@@ -59,13 +84,15 @@ th, td {
 .avg-column,
 .add-column,
 .rating-column,
+.faculty-column,
 
 .index-head,
 .pib-head,
 .group-head,
 .avg-head,
 .add-head,
-.rating-head{
+.rating-head,
+.faculty-head{
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
@@ -76,11 +103,13 @@ th, td {
 }
 
 .pib-column{
-    width: 35%;
+    width: 30%;
 
 }
-.group-column{
-    width: 15%;
+
+.group-column,
+.faculty-column{
+    width: 10%;
 }
 .avg-column,
 .add-column,
