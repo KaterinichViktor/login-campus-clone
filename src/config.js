@@ -34,12 +34,10 @@ const AdminSchema = new mongoose.Schema({
     username: String,
     password: String,
     budgetStudents: Number,
-    // faculties: [
-    //     {
-    //         faculty: String,
-    //         budgetStudents: Number
-    //     }
-    // ]
+    // faculties: [{
+    //     faculty: String,
+    //     budgetStudents: Number
+    // }]
 });
 
 const UserCollection = mongoose.model('User', UserSchema);
