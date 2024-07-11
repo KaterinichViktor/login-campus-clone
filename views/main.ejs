@@ -10,6 +10,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 
+    <script>
+        function filterByFaculty(faculty) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('faculty', faculty);
+            window.location.href = url.toString();
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -23,41 +30,55 @@
     </header>
     <div class="container">
         <h1>Рейтинг успішності</h1>
-    <% if (isAdmin) { %>
+
+        <% if (isAdmin) { %>
         <div id="admin-controls">
-            <form action="/updateBudget" method="post" class="admin-controls-from">
+            <form action="/updateBudget" method="post" class="admin-controls-form">
                 <input class="students-number-input" type="number" name="budgetStudents" placeholder="Number of budget students" value="<%= budgetStudents %>" required>
                 <button class="students-number-btn" type="submit">Оновити</button>
             </form>
         </div>
-    <% } %>
-    <table>
-        <thead>
-            <tr>
-                <th class="index-head">№</th>
-                <th class="pib-head">ПІБ</th>
-                <th class="group-head">Група</th>
-                <th class="avg-head">Середній бал</th>
-                <th class="add-head">Додаткові бали</th>
-                <th class="rating-head">Рейтинг</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% users.forEach((user, index) => { %>
+        <% } %>
+
+        <!-- Faculty Buttons -->
+        <div class="faculty-buttons">
+            <button onclick="filterByFaculty('all')" class="<%= selectedFaculty === 'all' ? 'active' : '' %>">Всі</button>
+        
+            <% faculties.forEach(faculty => { %>
+                <button onclick="filterByFaculty('<%= faculty %>')" class="<%= selectedFaculty === faculty ? 'active' : '' %>">
+                    <%= faculty %>
+                </button>
+            <% }) %> 
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th class="index-head">№</th>
+                    <th class="pib-head">ПІБ</th>
+                    <th class="faculty-head">Факультет</th>
+                    <th class="group-head">Група</th> 
+                    <th class="avg-head">Середній бал</th>
+                    <th class="add-head">Додаткові бали</th>
+                    <th class="rating-head">Рейтинг</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach((user, index) => { %>
                 <tr style="background-color: 
                     <%= index < Math.ceil(budgetStudents * 0.4) ? 
                         (index < Math.ceil(budgetStudents * 0.1) ? 'rgba(10,137,239,0.6)' : 'rgba(61,178,50,0.6)') : 'rgba(243,244,245,0.6)' %>;">
                     <td class="index-column"><%= index + 1 %></td>
                     <td class="pib-column"><%= user.surname %> <%= user.name %> <%= user.patronymic %></td>
+                    <td class="faculty-column"><%= user.faculty %></td>
                     <td class="group-column"><%= user.group %></td>
                     <td class="avg-column"><%= user.averageMark %></td>
                     <td class="add-column"><%= user.additionalMarks %></td>
                     <td class="rating-column"><%= user.rating %></td>
                 </tr>
-            <% }) %>
-
-        </tbody>
-    </table>
+                <% }) %>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>

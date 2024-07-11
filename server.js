@@ -19,14 +19,35 @@ app.use(session({
     saveUninitialized: true,
 }));
 
+// app.get("/", async (req, res) => {
+//     const users = await UserCollection.find({ rating: { $ne: null } }).sort({ rating: -1 }).exec();
+//     const admin = await AdminCollection.findOne({});
+//     const budgetStudents = admin ? admin.budgetStudents : 0;
+//     const isAdmin = req.session.isAdmin;
+//     const isLoggedIn = req.session.isAdmin || req.session.isUser;
+//     res.render("main", { users, isAdmin, isLoggedIn, budgetStudents });
+// });
+
+// Home route with faculty filtering
 app.get("/", async (req, res) => {
-    const users = await UserCollection.find({ rating: { $ne: null } }).sort({ rating: -1 }).exec();
+    const selectedFaculty = req.query.faculty || 'all';
+    let users;
+    
+    if (selectedFaculty === 'all') {
+        users = await UserCollection.find({ rating: { $ne: null } }).sort({ rating: -1 }).exec();
+    } else {
+        users = await UserCollection.find({ faculty: selectedFaculty, rating: { $ne: null } }).sort({ rating: -1 }).exec();
+    }
+
+    const faculties = await UserCollection.distinct('faculty');
     const admin = await AdminCollection.findOne({});
     const budgetStudents = admin ? admin.budgetStudents : 0;
     const isAdmin = req.session.isAdmin;
     const isLoggedIn = req.session.isAdmin || req.session.isUser;
-    res.render("main", { users, isAdmin, isLoggedIn, budgetStudents });
+
+    res.render("main", { users, faculties, selectedFaculty, isAdmin, isLoggedIn, budgetStudents });
 });
+
 
 app.get("/login", (req, res) => {
     res.render("login");

@@ -18,6 +18,7 @@ const UserSchema = new mongoose.Schema({
     surname: String,
     patronymic: String,
     group: String,
+    faculty: String,
     subjects: [{
         subject: String,
         teacher: String,
@@ -32,7 +33,13 @@ const AdminSchema = new mongoose.Schema({
     loginString: String,
     username: String,
     password: String,
-    budgetStudents: Number
+    budgetStudents: Number,
+    // faculties: [
+    //     {
+    //         faculty: String,
+    //         budgetStudents: Number
+    //     }
+    // ]
 });
 
 const UserCollection = mongoose.model('User', UserSchema);
