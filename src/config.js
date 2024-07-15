@@ -29,27 +29,27 @@ const UserSchema = new mongoose.Schema({
     averageMark: Number,
 });
 
-const AdminSchema = new mongoose.Schema({
-    loginString: String,
-    username: String,
-    password: String,
-    budgetStudents: Number,
-    // faculties: [{
-    //     faculty: String,
-    //     budgetStudents: Number
-    // }]
-});
-
 // const AdminSchema = new mongoose.Schema({
 //     loginString: String,
 //     username: String,
 //     password: String,
 //     budgetStudents: Number,
-//     faculties: [{
-//         faculty: String,
-//         budgetStudents: Number
-//     }]
+//     // faculties: [{
+//     //     faculty: String,
+//     //     budgetStudents: Number
+//     // }]
 // });
+
+const AdminSchema = new mongoose.Schema({
+    loginString: String,
+    username: String,
+    password: String,
+    budgetStudents: Number,
+    faculties: [{
+        faculty: String,
+        budgetStudents: Number
+    }]
+});
 
 const UserCollection = mongoose.model('User', UserSchema);
 const AdminCollection = mongoose.model('Admin', AdminSchema);

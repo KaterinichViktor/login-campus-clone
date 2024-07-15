@@ -29,23 +29,82 @@ app.use(session({
 // });
 
 // Home route with faculty filtering
-app.get("/", async (req, res) => {
-    const selectedFaculty = req.query.faculty || 'all';
-    let users;
+// app.get("/", async (req, res) => {
+//     const selectedFaculty = req.query.faculty || 'all';
+//     let users;
     
-    if (selectedFaculty === 'all') {
-        users = await UserCollection.find({ rating: { $ne: null } }).sort({ rating: -1 }).exec();
-    } else {
-        users = await UserCollection.find({ faculty: selectedFaculty, rating: { $ne: null } }).sort({ rating: -1 }).exec();
+//     if (selectedFaculty === 'all') {
+//         users = await UserCollection.find({ rating: { $ne: null } }).sort({ rating: -1 }).exec();
+//     } else {
+//         users = await UserCollection.find({ faculty: selectedFaculty, rating: { $ne: null } }).sort({ rating: -1 }).exec();
+//     }
+
+//     const faculties = await UserCollection.distinct('faculty');
+//     const admin = await AdminCollection.findOne({});
+//     const budgetStudents = admin ? admin.budgetStudents : 0;
+//     const isAdmin = req.session.isAdmin;
+//     const isLoggedIn = req.session.isAdmin || req.session.isUser;
+
+//     res.render("main", { users, faculties, selectedFaculty, isAdmin, isLoggedIn, budgetStudents });
+// });
+
+
+// Home route with faculty filtering
+app.get("/", async (req, res) => {
+    try {
+        const selectedFaculty = req.query.faculty || '123'; // Default to the first faculty
+        const admin = await AdminCollection.findOne({ username: "admin" });
+
+        if (!admin) {
+            return res.status(500).send("Admin data not found");
+        }
+
+        const facultyData = admin.faculties.find(f => f.faculty === selectedFaculty);
+        if (!facultyData) {
+            return res.status(404).send("Faculty data not found");
+        }
+        
+        const budgetStudents = facultyData.budgetStudents;
+
+        const users = await UserCollection.find({ faculty: selectedFaculty, rating: { $ne: null } }).sort({ rating: -1 }).exec();
+        const faculties = admin.faculties.map(f => f.faculty); // get list of all faculties
+        const isAdmin = req.session.isAdmin;
+        const isLoggedIn = req.session.isAdmin || req.session.isUser;
+
+        res.render("main", { users, faculties, selectedFaculty, isAdmin, isLoggedIn, budgetStudents });
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        res.status(500).send("Internal Server Error");
     }
+});
 
-    const faculties = await UserCollection.distinct('faculty');
-    const admin = await AdminCollection.findOne({});
-    const budgetStudents = admin ? admin.budgetStudents : 0;
-    const isAdmin = req.session.isAdmin;
-    const isLoggedIn = req.session.isAdmin || req.session.isUser;
+app.post("/updateBudget", async (req, res) => {
+    try {
+        if (!req.session.isAdmin) {
+            return res.status(403).send("Forbidden");
+        }
 
-    res.render("main", { users, faculties, selectedFaculty, isAdmin, isLoggedIn, budgetStudents });
+        const { faculty, budgetStudents } = req.body;
+        const admin = await AdminCollection.findOne({ username: "admin" });
+
+        if (!admin) {
+            return res.status(500).send("Admin data not found");
+        }
+
+        const facultyData = admin.faculties.find(f => f.faculty === faculty);
+
+        if (facultyData) {
+            facultyData.budgetStudents = parseInt(budgetStudents, 10);
+            await AdminCollection.updateOne({ username: "admin" }, { $set: { faculties: admin.faculties } });
+        } else {
+            return res.status(404).send("Faculty not found");
+        }
+
+        res.redirect(`/?faculty=${faculty}`);
+    } catch (error) {
+        console.error("Error updating budget students:", error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 
@@ -120,15 +179,15 @@ app.get("/editUser/:id", async (req, res) => {
     res.render("editUser", { user });
 });
 
-app.post("/updateBudget", async (req, res) => {
-    if (!req.session.isAdmin) {
-        return res.status(403).send("Forbidden");
-    }
-    const newBudget = parseInt(req.body.budgetStudents, 10);
-    // await AdminCollection.updateOne({ username: req.session.username }, { budgetStudents: newBudget });
-    await AdminCollection.updateOne({}, { budgetStudents: newBudget });
-    res.redirect("/");
-});
+// app.post("/updateBudget", async (req, res) => {
+//     if (!req.session.isAdmin) {
+//         return res.status(403).send("Forbidden");
+//     }
+//     const newBudget = parseInt(req.body.budgetStudents, 10);
+//     // await AdminCollection.updateOne({ username: req.session.username }, { budgetStudents: newBudget });
+//     await AdminCollection.updateOne({}, { budgetStudents: newBudget });
+//     res.redirect("/");
+// });
 
 app.get("/addUser", (req, res) => {
     if (!req.session.isAdmin) {

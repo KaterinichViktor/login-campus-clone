@@ -31,9 +31,17 @@
     <div class="container">
         <h1>Рейтинг успішності</h1>
 
+        <h2>Faculty: <%= selectedFaculty %></h1>
+        <h2>Budget students: <%= budgetStudents %></h2>
+
         <% if (isAdmin) { %>
         <div id="admin-controls">
             <form action="/updateBudget" method="post" class="admin-controls-form">
+                <select name="faculty" onchange="filterByFaculty(this.value)" required>
+                    <% faculties.forEach(faculty => { %>
+                        <option value="<%= faculty %>" <%= faculty === selectedFaculty ? 'selected' : '' %>><%= faculty %></option>
+                    <% }) %>
+                </select>
                 <input class="students-number-input" type="number" name="budgetStudents" placeholder="Number of budget students" value="<%= budgetStudents %>" required>
                 <button class="students-number-btn" type="submit">Оновити</button>
             </form>
@@ -42,8 +50,6 @@
 
         <!-- Faculty Buttons -->
         <div class="faculty-buttons">
-            <button onclick="filterByFaculty('all')" class="<%= selectedFaculty === 'all' ? 'active' : '' %>">Всі</button>
-        
             <% faculties.forEach(faculty => { %>
                 <button onclick="filterByFaculty('<%= faculty %>')" class="<%= selectedFaculty === faculty ? 'active' : '' %>">
                     <%= faculty %>
