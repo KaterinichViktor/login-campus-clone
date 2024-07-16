@@ -1,12 +1,7 @@
 .user-info-form{
     display: flex;
     flex-direction: column;
-}
-
-.auth-box,
-.pib-box,
-.group-box{
-    /* margin-bottom: 10px; */
+    width: 100%;
 }
 
 .auth-box,
@@ -16,18 +11,12 @@
     display: flex;
 }
 
-/* .add-marks-box{
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-} */
-
 .username-box,
 .password-box,
 .name-box,
 .surname-box,
 .patronymic-box,
+.faculty-box,
 .group-box,
 .add-marks-box{
     display: flex;
@@ -38,19 +27,9 @@
 
 }
 
-
-.pib-box{}
-.username-box{}
-.password-box{}
-.name-box{}
-.surname-box{}
-.patronymic-box{}
-.group-box{}
-
-
 .user-info-input{
     width: 200px;
-    height: 40px;
+    height: 44px;
     margin-top: 5px;
     padding: 8px;
     font-size: 20px;
@@ -96,7 +75,7 @@
     border: 1px solid #ddd;
     text-align: center;
     width: 4%;
-    height: 40px;
+    height: 44px;
 
 }
 
@@ -126,7 +105,7 @@
     background-color: #ddd;
     font-family: inherit;
     width: 80px;
-    height: 40px;
+    height: 44px;
     border: none;
     border-radius: 10px;
     font-size: 24px;
@@ -141,7 +120,7 @@
 .update-btn{
     font-family: inherit;
     width: 160px;
-    height: 40px;
+    height: 44px;
     background-color: rgb(53, 176, 162);
     border: none;
     border-radius: 10px;
@@ -150,15 +129,31 @@
 
     color: white;
     margin-bottom: 20px;
-}
-.update-btn{
+
     align-self: flex-end;
     margin-top: 40px;
 }
 
-
 .update-btn:hover{
     background-color: rgb(39, 132, 121);
+}
+
+.delete-user-btn{
+    position: absolute;
+    bottom: 0;
+    left: 40px;
+    width: 160px;
+    height: 44px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(194, 37, 10);
+    color: white;
+    font-size: 20px;
+    font-family: inherit;
+    cursor: pointer;
+}
+.delete-user-btn:hover{
+    background-color: rgb(255, 51, 15);
 }
 
 .avg-rating-box{
@@ -173,3 +168,11 @@
     margin-bottom: 20px;
     font-weight: 600;
 }
+
+
+
+@media screen and (min-width: 320px){}
+
+@media screen and (min-width: 768px){}
+
+@media screen and (min-width: 1440px){}

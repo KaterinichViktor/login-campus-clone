@@ -19,6 +19,8 @@
     font-style: normal;
 }
 
+
+
 body {
     height: 100vh;
 
@@ -28,7 +30,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding: 40px;
+  position: relative;
 }
 
 h2 {

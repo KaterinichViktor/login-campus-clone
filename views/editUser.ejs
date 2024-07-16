@@ -11,6 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
 </head>
 <body>
     <header>
@@ -51,6 +54,10 @@
             </div>
             
             <div class="group-add-box">
+                <div class="faculty-box">
+                    <label for="faculty">Факультет</label>
+                    <input class="user-info-input" type="text" id="faculty" name="faculty" value="<%= user.faculty %>" required>
+                </div>
                 <div class="group-box">
                     <label for="group">Група</label>
                     <input class="user-info-input" type="text" id="group" name="group" value="<%= user.group %>" required>
@@ -92,11 +99,12 @@
             <button class="update-btn" type="submit">Зберегти</button>
         </form>
 
-        <form class="delete-user-form" action="/deleteUser/<%= user._id %>" method="post">
-            <button class="delete-user-btn" type="submit">Видалити</button>
+        <form id="delete-user-form-<%= user._id %>" action="/deleteUser/<%= user._id %>" method="post">
+            <button class="delete-user-btn" type="button" onclick="confirmDelete('<%= user._id %>')">Видалити</button>
         </form>
     </div>
     
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script>
         function addSubject() {
             const table = document.getElementById('subjects-table').getElementsByTagName('tbody')[0];
@@ -113,6 +121,27 @@
         function removeSubject(button) {
             const row = button.parentElement.parentElement;
             row.parentElement.removeChild(row);
+        }
+
+
+        function confirmDelete(userId) {
+            Toastify({
+                text: "Are you sure you want to delete this user? Click here to confirm.",
+                duration: 5000,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "left", // `left`, `center` or `right`
+                backgroundColor: "rgb(204, 24, 0)",
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                onClick: function() {
+                    deleteUser(userId);
+                }
+            }).showToast();
+        }
+
+        function deleteUser(userId) {
+            const form = document.getElementById('delete-user-form-' + userId);
+            form.submit();
         }
     </script>
 </body>

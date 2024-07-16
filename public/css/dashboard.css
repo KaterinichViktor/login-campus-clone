@@ -8,9 +8,16 @@
   .admin-cards-container {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
     /* flex-direction: row; */
     /* gap: 20px; */
     padding: 10px;
+  }
+  .admin-cards-container{
+    margin-bottom: 40px;
+  }
+  .admin-info-form{
+    width: 100%;
   }
   
   .admin-card{
@@ -32,17 +39,18 @@
     position: relative;
   } 
 
-  .admin-info-form label{
+  .admin-card-label{
     display: flex;
     font-family: inherit;
     font-size: 20px;
     margin-bottom: 5px;
     font-weight: 600;
   }
-  .admin-info-form input{
+
+  .admin-card-input{
     width: 100%;
     margin-bottom: 15px;
-    height: 40px;
+    height: 44px;
     font-size: 20px;
     padding: 10px;
 
@@ -52,13 +60,27 @@
     outline: none;
   }
 
+  .admin-cancel-btn{
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    width: 40px;
+    height: 44px;
+    font-size: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  .admin-cancel-btn:hover{
+    color: red;
+  }
 
   .admin-safe-btn{
     position: absolute;
     bottom: 30px;
     right: 30px;
     width: 80px;
-    height: 40px;
+    height: 44px;
     font-size: 20px;
     font-family: inherit;
     border: none;
@@ -75,7 +97,7 @@
     bottom: 30px;
     left: 30px;
     width: 40px;
-    height: 40px;
+    height: 44px;
     font-size: 32px;
     background-color: transparent;
     border: none;

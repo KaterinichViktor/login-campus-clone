@@ -31,9 +31,19 @@
     <div class="container">
         <h1>Рейтинг успішності</h1>
 
+        <div class="faculty-info">
+            <p class="faculty-info-text">Факультет: <span class="faculty-info-accent"><%= selectedFaculty %></span></p>
+            <p class="faculty-info-text-2">Студентів на бюджеті: <span class="faculty-info-accent"><%= budgetStudents %></span></p>
+        </div>
+
         <% if (isAdmin) { %>
         <div id="admin-controls">
             <form action="/updateBudget" method="post" class="admin-controls-form">
+                <select class="faculty-dropdown" name="faculty" onchange="filterByFaculty(this.value)" required>
+                    <% faculties.forEach(faculty => { %>
+                        <option value="<%= faculty %>" <%= faculty === selectedFaculty ? 'selected' : '' %>><%= faculty %></option>
+                    <% }) %>
+                </select>
                 <input class="students-number-input" type="number" name="budgetStudents" placeholder="Number of budget students" value="<%= budgetStudents %>" required>
                 <button class="students-number-btn" type="submit">Оновити</button>
             </form>
@@ -42,8 +52,6 @@
 
         <!-- Faculty Buttons -->
         <div class="faculty-buttons">
-            <button onclick="filterByFaculty('all')" class="<%= selectedFaculty === 'all' ? 'active' : '' %>">Всі</button>
-        
             <% faculties.forEach(faculty => { %>
                 <button onclick="filterByFaculty('<%= faculty %>')" class="<%= selectedFaculty === faculty ? 'active' : '' %>">
                     <%= faculty %>
