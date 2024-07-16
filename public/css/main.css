@@ -5,15 +5,45 @@
 .admin-controls-from{
     display: flex;
 }
+
+.faculty-info{
+    width: 520px;
+    display: flex;
+    /* justify-content: space-between; */
+    margin-bottom: 40px;
+}
+.faculty-info-text,
+.faculty-info-text-2{
+    font-size: 26px;
+    font-weight: 600;
+    font-family: inherit;
+}
+.faculty-info-text{
+    width: 180px;
+}
+.faculty-info-text-2{
+    width: 300px;
+    margin-left: 40px;
+}
+
+
+.faculty-info-accent{
+    font-weight: 800;
+    color: rgb(53, 176, 162);
+    margin-left: 5px;
+
+}
+
 .faculty-buttons{
     display: flex;
     height: 40px;
+    width: 100%;
     margin-bottom: 20px;
 }
 .faculty-buttons button{
     height: 100%;
     margin: 0;
-    width: calc(100% / 11);
+    width: calc(100% / 10);
     border: 1px solid white;
     background-color:#f2f2f2;
     font-size: 20px;
@@ -31,6 +61,22 @@
     background-color:rgb(53, 176, 162);
 }
 
+
+
+.faculty-dropdown{
+    width: 60px;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 2px solid rgb(53, 176, 162);
+    outline: none;
+    font-weight: 700;
+    text-align: center;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+
 .students-number-input{
     width: 200px;
     height: 40px;
@@ -38,7 +84,7 @@
     padding: 8px;
     border-radius: 10px;
 
-    color: rgb(53, 176, 162);
+    color: black;
     font-weight: 700;
     outline: none;
     border: 2px solid rgb(53, 176, 162);

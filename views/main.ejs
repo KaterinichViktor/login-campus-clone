@@ -31,13 +31,15 @@
     <div class="container">
         <h1>Рейтинг успішності</h1>
 
-        <h2>Faculty: <%= selectedFaculty %></h1>
-        <h2>Budget students: <%= budgetStudents %></h2>
+        <div class="faculty-info">
+            <p class="faculty-info-text">Факультет: <span class="faculty-info-accent"><%= selectedFaculty %></span></p>
+            <p class="faculty-info-text-2">Студентів на бюджеті: <span class="faculty-info-accent"><%= budgetStudents %></span></p>
+        </div>
 
         <% if (isAdmin) { %>
         <div id="admin-controls">
             <form action="/updateBudget" method="post" class="admin-controls-form">
-                <select name="faculty" onchange="filterByFaculty(this.value)" required>
+                <select class="faculty-dropdown" name="faculty" onchange="filterByFaculty(this.value)" required>
                     <% faculties.forEach(faculty => { %>
                         <option value="<%= faculty %>" <%= faculty === selectedFaculty ? 'selected' : '' %>><%= faculty %></option>
                     <% }) %>

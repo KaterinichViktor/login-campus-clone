@@ -8,6 +8,7 @@
   .admin-cards-container {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
     /* flex-direction: row; */
     /* gap: 20px; */
     padding: 10px;

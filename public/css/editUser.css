@@ -1,6 +1,7 @@
 .user-info-form{
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .auth-box,
@@ -28,6 +29,7 @@
 .name-box,
 .surname-box,
 .patronymic-box,
+.faculty-box,
 .group-box,
 .add-marks-box{
     display: flex;

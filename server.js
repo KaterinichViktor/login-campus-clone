@@ -220,7 +220,7 @@ app.post("/editUser/:id", async (req, res) => {
         return res.status(403).send("Forbidden");
     }
 
-    const { username, password, name, surname, patronymic, group, additionalMarks } = req.body;
+    const { username, password, name, surname, patronymic, faculty, group, additionalMarks } = req.body;
 
     let subjects = [];
     Object.keys(req.body).forEach(key => {
@@ -241,6 +241,7 @@ app.post("/editUser/:id", async (req, res) => {
     user.name = name;
     user.surname = surname;
     user.patronymic = patronymic;
+    user.faculty = faculty;
     user.group = group;
     user.additionalMarks = additionalMarks;
     user.subjects = subjects;
@@ -279,7 +280,7 @@ app.post("/addUser", async (req, res) => {
         return res.status(403).send("Forbidden");
     }
 
-    const { username, password, name, surname, patronymic, group, additionalMarks } = req.body;
+    const { username, password, name, surname, patronymic, faculty, group, additionalMarks } = req.body;
 
     let subjects = [];
     Object.keys(req.body).forEach(key => {
@@ -313,6 +314,7 @@ app.post("/addUser", async (req, res) => {
         name,
         surname,
         patronymic,
+        faculty,
         group,
         subjects,
         additionalMarks,
