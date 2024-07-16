@@ -10,7 +10,7 @@
 
 .login-input{
     width: 300px;
-    height: 40px;
+    height: 44px;
     padding: 8px;
     font-size: 20px;
     margin-top: 10px;
@@ -37,7 +37,7 @@
 .login-btn{
     align-self: center;
     width: 160px;
-    height: 40px;
+    height: 44px;
     margin-top: 60px;
 
     background-color: rgb(53, 176, 162);

@@ -1,0 +1,75 @@
+.faculty-info{
+    margin-bottom: 40px;
+}
+.faculty-dropdown{
+    height: 44px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 2px solid rgb(53, 176, 162);
+    outline: none;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+}
+.students-number-input{
+    width: 200px;
+    height: 44px;
+    font-size: 24px;
+    font-weight: 700;
+    padding: 8px;
+    border-radius: 10px;
+    text-align: center;
+
+    color: black;
+    font-weight: 700;
+    outline: none;
+    border: 2px solid rgb(53, 176, 162);
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px){
+
+    .faculty-info{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .admin-controls-form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .faculty-dropdown{
+        width: 200px;
+        margin-bottom: 10px;
+    }
+    .students-number-input{
+        margin-bottom: 10px;
+    }
+    
+}
+
+@media screen and (min-width: 768px){
+    .admin-controls-form{
+        display: flex;
+    }
+    .faculty-info{
+        width: 520px; 
+        display: flex;
+    }
+    .faculty-info-text-2{
+        margin-left: 30px;
+    }
+    .faculty-dropdown{
+        margin-right: 20px;
+        width: 80px;
+        margin-right: 20px;
+    }
+}
+
+.faculty-info-text-2{
+    width: 290px;
+}
+@media screen and (min-width: 1440px){
+
+}
