@@ -52,7 +52,7 @@ app.use(session({
 // Home route with faculty filtering
 app.get("/", async (req, res) => {
     try {
-        const selectedFaculty = req.query.faculty || '123'; // Default to the first faculty
+        const selectedFaculty = req.query.faculty || 'ІТС'; // Default to the first faculty
         const admin = await AdminCollection.findOne({ username: "admin" });
 
         if (!admin) {

@@ -12,10 +12,44 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script>
         function submitAdminForm(adminId) {
             const form = document.getElementById('admin-form-' + adminId);
             form.submit();
+        }
+
+        // 1
+        // function deleteAdmin(adminId) {
+        //     const form = document.getElementById('delete-admin-form-' + adminId);
+        //     form.submit();
+        // }
+
+        // 2
+        // function deleteAdmin(adminId) {
+        //     const confirmation = confirm("Are you sure you want to delete this admin?");
+        //     if (confirmation) {
+        //         const form = document.getElementById('delete-admin-form-' + adminId);
+        //         form.submit();
+        //     }
+        // }
+
+        function confirmDelete(adminId) {
+            Toastify({
+                text: "Are you sure you want to delete this admin? Click here to confirm.",
+                duration: 5000,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "left", // `left`, `center` or `right`
+                backgroundColor: "rgb(204, 24, 0)",
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                onClick: function() {
+                    deleteAdmin(adminId);
+                }
+            }).showToast();
         }
 
         function deleteAdmin(adminId) {
@@ -29,10 +63,12 @@
             const newAdminForm = `
                 <div class="admin-card" id="${newAdminFormId}">
                     <form id="admin-form-new" action="/addAdmin" method="post">
-                        <input type="text" name="username" placeholder="Username" required>
-                        <input type="password" name="password" placeholder="Password" required>
-                        <button type="button" onclick="submitAdminForm('new')">Save</button>
-                        <button type="button" onclick="cancelNewAdmin('${newAdminFormId}')">Cancel</button>
+                        <label class="admin-card-label" for="admin-username">Логін</label>
+                        <input class="admin-card-input" type="text" name="username" placeholder="Username" required>
+                        <label class="admin-card-label" for="admin-password">Пароль</label>
+                        <input class="admin-card-input" type="password" name="password" placeholder="Password" required>
+                        <button class="admin-safe-btn" type="button" onclick="submitAdminForm('new')">Save</button>
+                        <button class="admin-cancel-btn" type="button" onclick="cancelNewAdmin('${newAdminFormId}')">Cancel</button>
                     </form>
                 </div>
             `;
@@ -64,14 +100,17 @@
             <% admins.forEach(admin => { %>
             <div class="admin-card">
                 <form id="admin-form-<%= admin._id %>" class="admin-info-form" action="/editAdmin/<%= admin._id %>" method="post">
-                    <label for="admin-username">Логін</label>
-                    <input type="text" name="username" id="admin-username" value="<%= admin.username %>" required>
-                    <label for="admin-password">Пароль</label>
-                    <input type="password" name="password" id="admin-password" placeholder="New Password">
+                    <label class="admin-card-label" for="admin-username">Логін</label>
+                    <input class="admin-card-input" type="text" name="username" id="admin-username" value="<%= admin.username %>" required>
+                    <label class="admin-card-label" for="admin-password">Пароль</label>
+                    <input class="admin-card-input" type="password" name="password" id="admin-password" placeholder="New Password">
                     <button class="admin-safe-btn" type="button" onclick="submitAdminForm('<%= admin._id %>')">Save</button>
                 </form>
-                <form id="delete-admin-form-<%= admin._id %>" action="/deleteAdmin/<%= admin._id %>" method="post">
+                <!-- <form id="delete-admin-form-<%= admin._id %>" action="/deleteAdmin/<%= admin._id %>" method="post">
                     <button class="admin-delete-btn" type="button" onclick="deleteAdmin('<%= admin._id %>')"><i class="fa">&#xf014;</i></button>
+                </form> -->
+                <form id="delete-admin-form-<%= admin._id %>" action="/deleteAdmin/<%= admin._id %>" method="post">
+                    <button class="admin-delete-btn" type="button" onclick="confirmDelete('<%= admin._id %>')"><i class="fa">&#xf014;</i></button>
                 </form>
             </div>
             <% }) %>
@@ -85,6 +124,7 @@
             <% users.forEach(user => { %>
             <div class="user-card" onclick="openEditUserPage('<%= user._id %>')">
                 <h3><%= user.surname %> <%= user.name[0] %>. <%= user.patronymic[0] %>.</h3>
+                <p class="user-card-txt">Факултет: <b><%= user.faculty %></b></p>
                 <p class="user-card-txt">Група: <b><%= user.group %></b></p>
                 <p class="user-card-txt">Середній бал: <b><%= user.averageMark %></b></p>
                 <p class="user-card-txt">Додаткові бали: <b><%= user.additionalMarks %></b></p>

@@ -152,15 +152,31 @@
 
     color: white;
     margin-bottom: 20px;
-}
-.update-btn{
+
     align-self: flex-end;
     margin-top: 40px;
 }
 
-
 .update-btn:hover{
     background-color: rgb(39, 132, 121);
+}
+
+.delete-user-btn{
+    position: absolute;
+    bottom: 0;
+    left: 40px;
+    width: 160px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(194, 37, 10);
+    color: white;
+    font-size: 20px;
+    font-family: inherit;
+    cursor: pointer;
+}
+.delete-user-btn:hover{
+    background-color: rgb(255, 51, 15);
 }
 
 .avg-rating-box{
