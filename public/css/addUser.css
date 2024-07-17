@@ -25,9 +25,134 @@
     outline: none;
     border: 2px solid rgb(53, 176, 162);
 }
+.user-cards-container,
+.admin-cards-container {
+  display: flex;
+  flex-wrap: wrap;
 
-@media screen and (min-width: 320px) and (max-width: 768px){
+  /* flex-direction: row; */
+  /* gap: 20px; */
+  /* padding: 10px; */
+}
 
+.admin-cards-container{
+    margin-bottom: 40px;
+}
+
+.admin-card{
+    background-color: rgba(94, 197, 171, 0.05);
+    border-radius: 10px;
+
+    border: 1px solid #ccc;
+
+    max-width: 360px;
+    padding: 30px;
+    height: 320px;
+    box-sizing: border-box;
+
+    /* font-size: 20px; */
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+  } 
+
+  .user-card {
+    background-color: rgba(94, 197, 171, 0.05);
+    border-radius: 10px;
+
+    border: 1px solid #ccc;
+    padding: 30px;
+
+    max-width: 360px;
+    height: 320px;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    font-size: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+.auth-box,
+.pib-box,
+.group-add-box,
+.add-marks-box{
+    display: flex;
+}
+
+.username-box,
+.password-box,
+.name-box,
+.surname-box,
+.patronymic-box,
+.faculty-box,
+.group-box,
+.add-marks-box{
+    display: flex;
+    flex-direction: column;
+    padding: 10px 30px 10px 0;
+    font-size: 20px;
+    font-weight: 600;
+
+}
+
+.user-info-input{
+    width: 200px;
+    height: 44px;
+    margin-top: 5px;
+    padding: 8px;
+    font-size: 20px;
+
+    border: 2px solid rgb(53, 176, 162);
+    border-radius: 10px;
+    font-family: inherit;
+    outline: none;
+}
+
+.user-info-form{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px){
+
+    .user-info-form{
+        max-width: 370px;
+    }
+    .delete-user-btn {
+        width: 100px;
+    }
+    .update-btn{
+        width: 100px;
+    }
+
+    .auth-box,
+    .pib-box,
+    .group-add-box,
+    .add-marks-box{
+        flex-direction: column;
+    }
+
+    .username-box,
+    .password-box,
+    .name-box,
+    .surname-box,
+    .patronymic-box,
+    .faculty-box,
+    .group-box,
+    .add-marks-box{
+        padding: 10px 0;
+    }
+    .user-info-input{
+        width: 100%;
+        max-width: 370px;
+    }
     .faculty-info{
         display: flex;
         flex-direction: column;
@@ -46,9 +171,29 @@
     .students-number-input{
         margin-bottom: 10px;
     }
+
+    .admin-cards-container{
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .admin-card{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .user-cards-container{
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .user-card{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
     
 }
-
 @media screen and (min-width: 768px){
     .admin-controls-form{
         display: flex;
@@ -65,11 +210,94 @@
         width: 80px;
         margin-right: 20px;
     }
+
+    .admin-card{
+        margin: 10px;
+    }
+    .user-card{
+        margin: 10px;
+        
+    }
+
+    /* .admin-cards-container{
+        flex-direction: row;
+        align-items: center;
+    } */
+
 }
+
+@media screen and (min-width: 768px) and (max-width: 1000px){
+    .admin-card{
+        width: calc(50% - 20px);
+    }
+    .user-card{
+        width: calc(50% - 20px);
+    }
+
+    .admin-cards-container{
+        width: 680px;
+    }
+    .user-cards-container{
+        width: 680px;
+    }
+}
+@media screen and (min-width: 1000px) and (max-width: 1199px){
+    .user-card{
+        width: calc(33% - 20px);
+    }
+}
+@media screen and (min-width: 1000px) and (max-width: 1440px) {
+    .admin-cards-container{
+        width: 920px;
+    }
+    .user-cards-container{
+        width: 920px;
+    }
+
+    .admin-card{
+        width: calc(33% - 20px);
+    }
+
+}
+@media screen and (min-width: 1200px) and (max-width: 1440px) {
+    .admin-cards-container{
+        width: 1120px;
+    }
+    .user-cards-container{
+        width: 1120px;
+    }
+    .user-card{
+        width: calc(25% - 20px);
+    }
+}
+
+
 
 .faculty-info-text-2{
     width: 290px;
 }
 @media screen and (min-width: 1440px){
+    .admin-cards-container{
+        width: 100%;
+    }
+    .user-cards-container{
+        width: 100%;
+    }
+    .admin-card{
+        width: calc(25% - 20px);
+    }
+    .user-card{
+        width: calc(20% - 20px);
+    }
 
+    .user-info-input{
+        width: 200px;
+    }
+
+    .delete-user-btn {
+        width: 160px;
+    }
+    .update-btn{
+        width: 160px;
+    }
 }

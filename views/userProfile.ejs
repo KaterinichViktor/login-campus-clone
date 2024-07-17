@@ -25,26 +25,47 @@
             <p class="user-info-txt">Факультет: <b><%= user.faculty %></b></p>
             <p class="user-info-txt">Група: <b><%= user.group %></b></p>
             <p class="user-info-txt">Додаткові бали: <b><%= user.additionalMarks %></b></p>
-            <table>
-                <thead>
-                    <tr>
-                        <th class="subject-head">Предмет</th>
-                        <th class="teacher-head">Викладач</th>
-                        <th class="mark-head">Оцінка</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% user.subjects.forEach(subject => { %>
+            
+
+            <div class="abomination">
+                <table class="sub-table">
+                    <thead>
                         <tr>
-                            <td class="subject-column"><%= subject.subject %></td>
-                            <td class="teacher-column"><%= subject.teacher %></td>
-                            <td class="mark-column"><%= subject.mark %></td>
+                            <th class="subject-head">Предмет</th>
                         </tr>
-                    <% }) %>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <% user.subjects.forEach(subject => { %>
+                            <tr>
+                                <td class="subject-column"><%= subject.subject %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+                <div class="table-container">
+                    <table class="subjects-table">
+                        <thead>
+                            <tr>
+                                <!-- <th class="subject-head">Предмет</th> -->
+                                <th class="teacher-head">Викладач</th>
+                                <th class="mark-head">Оцінка</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% user.subjects.forEach(subject => { %>
+                                <tr>
+                                    <!-- <td class="subject-column"><%= subject.subject %></td> -->
+                                    <td class="teacher-column"><%= subject.teacher %></td>
+                                    <td class="mark-column"><%= subject.mark %></td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <p class="user-info-txt">Середній бал: <b><%= user.averageMark %></b></p>
-    
+        
             <p class="user-info-txt">Рейтинг: <b><%= user.rating %></b></p>
         </div>
     </div>
