@@ -108,24 +108,24 @@
     background-color: rgb(39, 132, 121);
 }
 
-table {
-    width: 100%;
-    min-width: 660px;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    font-size: 18px;
-}
+
 
 th, td {
     font-size: 20px;
+    height: 50px;
+    white-space:nowrap;
 }
 
-.pib-column{
-
-    border: 1px solid #ddd;
+.pib-column,
+.pib-head{
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
     padding: 8px;
+    white-space:nowrap;
 
 }
+
 
 .index-column,
 .group-column,
@@ -135,7 +135,6 @@ th, td {
 .faculty-column,
 
 .index-head,
-.pib-head,
 .group-head,
 .avg-head,
 .add-head,
@@ -144,6 +143,7 @@ th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
+    white-space:nowrap;
 }
 
 .index-column{

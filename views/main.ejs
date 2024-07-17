@@ -16,6 +16,14 @@
             url.searchParams.set('faculty', faculty);
             window.location.href = url.toString();
         }
+
+
+        function filterNumericInput(event) {
+            const input = event.target;
+            let value = input.value.replace(/[^0-9]/g, '');
+            if (value > 150) value = 150;
+            input.value = value;
+        }
     </script>
 </head>
 <body>
@@ -44,7 +52,7 @@
                         <option value="<%= faculty %>" <%= faculty === selectedFaculty ? 'selected' : '' %>><%= faculty %></option>
                     <% }) %>
                 </select>
-                <input class="students-number-input" type="number" name="budgetStudents" placeholder="Number of budget students" value="<%= budgetStudents %>" required>
+                <input class="students-number-input" type="number" name="budgetStudents" oninput="filterNumericInput(event)" max="150" placeholder="Кількість бюджетників" value="<%= budgetStudents %>" required>
                 <button class="students-number-btn" type="submit">Оновити</button>
             </form>
         </div>
@@ -59,34 +67,57 @@
             <% }) %> 
         </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th class="index-head">№</th>
-                    <th class="pib-head">ПІБ</th>
-                    <th class="faculty-head">Факультет</th>
-                    <th class="group-head">Група</th> 
-                    <th class="avg-head">Середній бал</th>
-                    <th class="add-head">Додаткові бали</th>
-                    <th class="rating-head">Рейтинг</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% users.forEach((user, index) => { %>
-                <tr style="background-color: 
-                    <%= index < Math.ceil(budgetStudents * 0.4) ? 
-                        (index < Math.ceil(budgetStudents * 0.1) ? 'rgba(10,137,239,0.6)' : 'rgba(61,178,50,0.6)') : 'rgba(243,244,245,0.6)' %>;">
-                    <td class="index-column"><%= index + 1 %></td>
-                    <td class="pib-column"><%= user.surname %> <%= user.name %> <%= user.patronymic %></td>
-                    <td class="faculty-column"><%= user.faculty %></td>
-                    <td class="group-column"><%= user.group %></td>
-                    <td class="avg-column"><%= user.averageMark %></td>
-                    <td class="add-column"><%= user.additionalMarks %></td>
-                    <td class="rating-column"><%= user.rating %></td>
-                </tr>
-                <% }) %>
-            </tbody>
-        </table>
+
+
+        <div class="abomination">
+            <table class="index-table">
+                <thead>
+                    <tr>
+                        <th class="index-head">№</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% users.forEach((user, index) => { %>
+                        <tr style="background-color: 
+                            <%= index < Math.floor(budgetStudents * 0.4) ? 
+                                (index < Math.ceil(budgetStudents * 0.1) ? 'rgba(10,137,239,0.6)' : 'rgba(61,178,50,0.6)') : 'rgba(243,244,245,0.6)' %>;">
+                            <td class="index-column"><%= index + 1 %></td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+    
+            </table>
+            <div class="table-container">
+                <table class="main-table">
+                    <thead>
+                        <tr>
+                            <!-- <th class="index-head">№</th> -->
+                            <th class="pib-head">ПІБ</th>
+                            <th class="faculty-head">Факультет</th>
+                            <th class="group-head">Група</th> 
+                            <th class="avg-head">Середній бал</th>
+                            <th class="add-head">Дод. бали</th>
+                            <th class="rating-head">Рейтинг</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% users.forEach((user, index) => { %>
+                        <tr style="background-color: 
+                            <%= index < Math.floor(budgetStudents * 0.4) ? 
+                                (index < Math.ceil(budgetStudents * 0.1) ? 'rgba(10,137,239,0.6)' : 'rgba(61,178,50,0.6)') : 'rgba(243,244,245,0.6)' %>;">
+                            <!-- <td class="index-column"><%= index + 1 %></td> -->
+                            <td class="pib-column"><%= user.surname %> <%= user.name %> <%= user.patronymic %></td>
+                            <td class="faculty-column"><%= user.faculty %></td>
+                            <td class="group-column"><%= user.group %></td>
+                            <td class="avg-column"><%= user.averageMark %></td>
+                            <td class="add-column"><%= user.additionalMarks %></td>
+                            <td class="rating-column"><%= user.rating %></td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </body>
 </html>

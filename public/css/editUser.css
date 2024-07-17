@@ -79,26 +79,38 @@
 
 }
 
-.subject-column,
 .teacher-column,
+.teacher-head{
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    
+    text-align: center;
+    width: 32%;
+
+    font-size: 20px;
+    padding: 8px;
+}
+
+.subject-column,
 .mark-column,
 
 .subject-head,
-.teacher-head,
 .mark-head{
     border: 1px solid #ddd;
     text-align: center;
     width: 32%;
 
     font-size: 20px;
+    padding: 8px;
 }
 
-.subject-head,
+/* .subject-head,
 .teacher-head,
 .mark-head,
 .delete-head{
     padding: 8px;
-}
+} */
 
 
 .add-subject-btn{
@@ -171,8 +183,3 @@
 
 
 
-@media screen and (min-width: 320px){}
-
-@media screen and (min-width: 768px){}
-
-@media screen and (min-width: 1440px){}
