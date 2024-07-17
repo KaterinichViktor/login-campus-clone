@@ -1,17 +1,17 @@
-.user-info-form{
+/* .user-info-form{
     display: flex;
     flex-direction: column;
     width: 100%;
-}
+} */
 
-.auth-box,
+/* .auth-box,
 .pib-box,
 .group-add-box,
 .add-marks-box{
     display: flex;
-}
+} */
 
-.username-box,
+/* .username-box,
 .password-box,
 .name-box,
 .surname-box,
@@ -38,7 +38,7 @@
     border-radius: 10px;
     font-family: inherit;
     outline: none;
-}
+} */
 
 #subjects-table{
     margin-top: 40px;
@@ -131,7 +131,7 @@
 
 .update-btn{
     font-family: inherit;
-    width: 160px;
+    
     height: 44px;
     background-color: rgb(53, 176, 162);
     border: none;
@@ -152,9 +152,9 @@
 
 .delete-user-btn{
     position: absolute;
-    bottom: 0;
+    bottom: 60px;
     left: 40px;
-    width: 160px;
+    
     height: 44px;
     border: none;
     border-radius: 10px;

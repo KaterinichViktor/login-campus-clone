@@ -77,14 +77,82 @@
     align-items: flex-start;
   }
 
+.auth-box,
+.pib-box,
+.group-add-box,
+.add-marks-box{
+    display: flex;
+}
 
+.username-box,
+.password-box,
+.name-box,
+.surname-box,
+.patronymic-box,
+.faculty-box,
+.group-box,
+.add-marks-box{
+    display: flex;
+    flex-direction: column;
+    padding: 10px 30px 10px 0;
+    font-size: 20px;
+    font-weight: 600;
+
+}
+
+.user-info-input{
+    width: 200px;
+    height: 44px;
+    margin-top: 5px;
+    padding: 8px;
+    font-size: 20px;
+
+    border: 2px solid rgb(53, 176, 162);
+    border-radius: 10px;
+    font-family: inherit;
+    outline: none;
+}
+
+.user-info-form{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
 
 @media screen and (min-width: 320px) and (max-width: 767px){
 
-    table{
-        overflow-x: hidden;
+    .user-info-form{
+        max-width: 370px;
+    }
+    .delete-user-btn {
+        width: 100px;
+    }
+    .update-btn{
+        width: 100px;
     }
 
+    .auth-box,
+    .pib-box,
+    .group-add-box,
+    .add-marks-box{
+        flex-direction: column;
+    }
+
+    .username-box,
+    .password-box,
+    .name-box,
+    .surname-box,
+    .patronymic-box,
+    .faculty-box,
+    .group-box,
+    .add-marks-box{
+        padding: 10px 0;
+    }
+    .user-info-input{
+        width: 100%;
+        max-width: 370px;
+    }
     .faculty-info{
         display: flex;
         flex-direction: column;
@@ -222,4 +290,14 @@
         width: calc(20% - 20px);
     }
 
+    .user-info-input{
+        width: 200px;
+    }
+
+    .delete-user-btn {
+        width: 160px;
+    }
+    .update-btn{
+        width: 160px;
+    }
 }
