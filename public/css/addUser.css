@@ -122,10 +122,18 @@
 
 @media screen and (min-width: 320px) and (max-width: 767px){
 
+    .add-subject-btn{
+        width: 48px;
+        height: 32px;
+    }
+
     .user-info-form{
         max-width: 370px;
     }
     .delete-user-btn {
+        width: 100px;
+    }
+    .cancel-user-btn{
         width: 100px;
     }
     .update-btn{
@@ -195,6 +203,16 @@
     
 }
 @media screen and (min-width: 768px){
+    .delete-user-btn {
+        width: 160px;
+    }
+    .cancel-user-btn{
+        width: 160px;
+    }
+    .update-btn{
+        width: 160px;
+    }
+
     .admin-controls-form{
         display: flex;
     }
@@ -227,6 +245,9 @@
 }
 
 @media screen and (min-width: 768px) and (max-width: 1000px){
+
+
+
     .admin-card{
         width: calc(50% - 20px);
     }

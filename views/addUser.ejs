@@ -14,7 +14,7 @@
 </head>
 <body>
     <header>
-        <a href="/">Головна</a>
+        <a class="main-logo" href="/">Головна</a>
         <div class="header-profile">
             <a href="/profile">Профіль</a>
             <a href="/logout">Вийти</a>
@@ -64,27 +64,31 @@
                 </div>
             </div>
             
-            <table id="subjects-table" class="subjects-table">
-                <thead>
-                    <tr>
-                        <th class="subject-head">Предмет</th>
-                        <th class="teacher-head">Викладач</th>
-                        <th class="mark-head">Оцінка</th>
-                        <th class="delete-head"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="subject-column"><input class="subjects-input" type="text" name="subjects[0][subject]" required></td>
-                        <td class="teacher-column"><input class="subjects-input" type="text" name="subjects[0][teacher]" required></td>
-                        <td class="mark-column"><input class="subjects-input" type="number" name="subjects[0][mark]" ></td>
-                        <td class="delete-column"><button class="delete-subject-btn" type="button" onclick="removeSubject(this)"><i class="fa">&#xf014;</i></button></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-container">
+                <table id="subjects-table" class="subjects-table">
+                    <thead>
+                        <tr>
+                            <th class="subject-head">Предмет</th>
+                            <th class="teacher-head">Викладач</th>
+                            <th class="mark-head">Оцінка</th>
+                            <th class="delete-head"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="subject-column"><input class="subjects-input" type="text" name="subjects[0][subject]" required></td>
+                            <td class="teacher-column"><input class="subjects-input" type="text" name="subjects[0][teacher]" required></td>
+                            <td class="mark-column"><input class="subjects-input" type="number" name="subjects[0][mark]" ></td>
+                            <td class="delete-column"><button class="delete-subject-btn" type="button" onclick="removeSubject(this)"><i class="fa">&#xf014;</i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
 
             <button class="add-subject-btn" type="button" onclick="addSubject()">&#10010;</button>
 
+            <a class="cancel-user-btn" href="/profile">Cancel</a>
             <button class="update-btn" type="submit">Зберегти</button>
 
         </form>

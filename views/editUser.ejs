@@ -68,26 +68,30 @@
                 </div>
             </div>
 
-            <table id="subjects-table" class="subjects-table">
-                <thead>
-                    <tr>
-                        <th class="subject-head">Предмет</th>
-                        <th class="teacher-head">Викладач</th>
-                        <th class="mark-head">Оцінка</th>
-                        <th class="delete-head"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% (user.subjects || []).forEach((subject, index) => { %>
+            <div class="table-container">
+                <table id="subjects-table" class="subjects-table">
+                    <thead>
                         <tr>
-                            <td class="subject-column"><input class="subjects-input" type="text" name="subjects[<%= index %>][subject]" value="<%= subject.subject %>" required></td>
-                            <td class="teacher-column"><input class="subjects-input" type="text" name="subjects[<%= index %>][teacher]" value="<%= subject.teacher %>" required></td>
-                            <td class="mark-column"><input class="subjects-input" type="number" name="subjects[<%= index %>][mark]" value="<%= subject.mark %>" ></td>
-                            <td class="delete-column"><button class="delete-subject-btn" type="button" onclick="removeSubject(this)"><i class="fa">&#xf014;</i></button></td>
+                            <th class="subject-head">Предмет</th>
+                            <th class="teacher-head">Викладач</th>
+                            <th class="mark-head">Оцінка</th>
+                            <th class="delete-head"></th>
                         </tr>
-                    <% }) %>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <% (user.subjects || []).forEach((subject, index) => { %>
+                            <tr>
+                                <td class="subject-column"><input class="subjects-input" type="text" name="subjects[<%= index %>][subject]" value="<%= subject.subject %>" required></td>
+                                <td class="teacher-column"><input class="subjects-input" type="text" name="subjects[<%= index %>][teacher]" value="<%= subject.teacher %>" required></td>
+                                <td class="mark-column"><input class="subjects-input" type="number" name="subjects[<%= index %>][mark]" value="<%= subject.mark %>" ></td>
+                                <td class="delete-column"><button class="delete-subject-btn" type="button" onclick="removeSubject(this)"><i class="fa">&#xf014;</i></button></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+                
+            </div>
+            
 
             <button class="add-subject-btn" type="button" onclick="addSubject()">&#10010;</button>
 
@@ -96,12 +100,13 @@
                 <p>Рейтинг: <b><%= user.rating %></b></p>
             </div>
 
+            <button class="delete-user-btn" type="button" onclick="confirmDelete('<%= user._id %>')">Видалити</button>
             <button class="update-btn" type="submit">Зберегти</button>
         </form>
 
-        <form id="delete-user-form-<%= user._id %>" action="/deleteUser/<%= user._id %>" method="post">
+        <!-- <form id="delete-user-form-<%= user._id %>" action="/deleteUser/<%= user._id %>" method="post">
             <button class="delete-user-btn" type="button" onclick="confirmDelete('<%= user._id %>')">Видалити</button>
-        </form>
+        </form> -->
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
