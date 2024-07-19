@@ -24,17 +24,55 @@
             if (value > 150) value = 150;
             input.value = value;
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.profile-btn').addEventListener('click', function(event) {
+                event.stopPropagation();
+                document.querySelector('.dropdown-content').classList.toggle('show');
+            });
+
+            // Close the dropdown if the user clicks outside of it
+            window.onclick = function(event) {
+                if (!event.target.matches('.profile-btn')) {
+                    var dropdowns = document.querySelectorAll('.dropdown-content');
+                    dropdowns.forEach(function(dropdown) {
+                        if (dropdown.classList.contains('show')) {
+                            dropdown.classList.remove('show');
+                        }
+                    });
+                }
+            }
+        });
+
     </script>
 </head>
 <body>
     <header>
-        <a href="/">Головна</a>
-        <div class="header-profile">
+        <a class="main-logo" href="/">Головна</a>
+        <!-- <div class="header-profile">
             <a href="/profile">Профіль</a>
             <% if (isLoggedIn) { %>
                 <a href="/logout">Вийти</a>
             <% } %>
+        </div> -->
+        <div class="header-profile">
+            <button class="profile-btn">Profile</button>
+            <div class="dropdown-content">
+                <a href="/profile">Профіль</a>
+                <% if (isLoggedIn) { %>
+                    <a href="/logout">Вийти</a>
+                <% } %>
+            </div>
         </div>
+
+
+        <!-- <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div class="slider round"></div>
+            </label>
+            <em>Enable Dark Mode!</em>
+        </div> -->
     </header>
     <div class="container">
         <h1>Рейтинг успішності</h1>

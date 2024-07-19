@@ -16,11 +16,21 @@
 
 </head>
 <body>
-    <header>
+    <!-- <header>
         <a href="/">Головна</a>
         <div class="header-profile">
             <a href="/profile">Профіль</a>
             <a href="/logout">Вийти</a>
+        </div>
+    </header> -->
+    <header>
+        <a class="main-logo" href="/">Головна</a>
+        <div class="header-profile">
+            <button class="profile-btn">Profile</button>
+            <div class="dropdown-content">
+                <a href="/profile">Профіль</a>
+                <a href="/logout">Вийти</a>
+            </div>
         </div>
     </header>
     <div class="container">
@@ -68,26 +78,30 @@
                 </div>
             </div>
 
-            <table id="subjects-table" class="subjects-table">
-                <thead>
-                    <tr>
-                        <th class="subject-head">Предмет</th>
-                        <th class="teacher-head">Викладач</th>
-                        <th class="mark-head">Оцінка</th>
-                        <th class="delete-head"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% (user.subjects || []).forEach((subject, index) => { %>
+            <div class="table-container">
+                <table id="subjects-table" class="subjects-table">
+                    <thead>
                         <tr>
-                            <td class="subject-column"><input class="subjects-input" type="text" name="subjects[<%= index %>][subject]" value="<%= subject.subject %>" required></td>
-                            <td class="teacher-column"><input class="subjects-input" type="text" name="subjects[<%= index %>][teacher]" value="<%= subject.teacher %>" required></td>
-                            <td class="mark-column"><input class="subjects-input" type="number" name="subjects[<%= index %>][mark]" value="<%= subject.mark %>" ></td>
-                            <td class="delete-column"><button class="delete-subject-btn" type="button" onclick="removeSubject(this)"><i class="fa">&#xf014;</i></button></td>
+                            <th class="subject-head">Предмет</th>
+                            <th class="teacher-head">Викладач</th>
+                            <th class="mark-head">Оцінка</th>
+                            <th class="delete-head"></th>
                         </tr>
-                    <% }) %>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <% (user.subjects || []).forEach((subject, index) => { %>
+                            <tr>
+                                <td class="subject-column"><input class="subjects-input" type="text" name="subjects[<%= index %>][subject]" value="<%= subject.subject %>" required></td>
+                                <td class="teacher-column"><input class="subjects-input" type="text" name="subjects[<%= index %>][teacher]" value="<%= subject.teacher %>" required></td>
+                                <td class="mark-column"><input class="subjects-input" type="number" name="subjects[<%= index %>][mark]" value="<%= subject.mark %>" ></td>
+                                <td class="delete-column"><button class="delete-subject-btn" type="button" onclick="removeSubject(this)"><i class="fa">&#xf014;</i></button></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+                
+            </div>
+            
 
             <button class="add-subject-btn" type="button" onclick="addSubject()">&#10010;</button>
 
@@ -96,12 +110,13 @@
                 <p>Рейтинг: <b><%= user.rating %></b></p>
             </div>
 
+            <button class="delete-user-btn" type="button" onclick="confirmDelete('<%= user._id %>')">Видалити</button>
             <button class="update-btn" type="submit">Зберегти</button>
         </form>
 
-        <form id="delete-user-form-<%= user._id %>" action="/deleteUser/<%= user._id %>" method="post">
+        <!-- <form id="delete-user-form-<%= user._id %>" action="/deleteUser/<%= user._id %>" method="post">
             <button class="delete-user-btn" type="button" onclick="confirmDelete('<%= user._id %>')">Видалити</button>
-        </form>
+        </form> -->
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
@@ -143,6 +158,26 @@
             const form = document.getElementById('delete-user-form-' + userId);
             form.submit();
         }
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.profile-btn').addEventListener('click', function(event) {
+                event.stopPropagation();
+                document.querySelector('.dropdown-content').classList.toggle('show');
+            });
+
+            // Close the dropdown if the user clicks outside of it
+            window.onclick = function(event) {
+                if (!event.target.matches('.profile-btn')) {
+                    var dropdowns = document.querySelectorAll('.dropdown-content');
+                    dropdowns.forEach(function(dropdown) {
+                        if (dropdown.classList.contains('show')) {
+                            dropdown.classList.remove('show');
+                        }
+                    });
+                }
+            }
+        });
     </script>
 </body>
 </html>

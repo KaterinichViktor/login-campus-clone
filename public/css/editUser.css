@@ -42,7 +42,7 @@
 
 #subjects-table{
     margin-top: 40px;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
 }
 
 .subjects-input{
@@ -61,6 +61,7 @@
     border: none;
     width: 100%;
     height: 100%;
+    padding: 8px;
 
     font-family: inherit;
     font-size: 24px;
@@ -74,7 +75,7 @@
 .delete-head{
     border: 1px solid #ddd;
     text-align: center;
-    width: 4%;
+    width: 7%;
     height: 44px;
 
 }
@@ -86,7 +87,7 @@
     border-right: 1px solid #ddd;
     
     text-align: center;
-    width: 32%;
+    width: 31%;
 
     font-size: 20px;
     padding: 8px;
@@ -99,7 +100,7 @@
 .mark-head{
     border: 1px solid #ddd;
     text-align: center;
-    width: 32%;
+    width: 31%;
 
     font-size: 20px;
     padding: 8px;
@@ -149,13 +150,21 @@
 .update-btn:hover{
     background-color: rgb(39, 132, 121);
 }
+.cancel-user-btn{
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+}
 
-.delete-user-btn{
+.delete-user-btn,
+.cancel-user-btn{
     position: absolute;
-    bottom: 60px;
-    left: 40px;
+    bottom: 0;
+    left: 0;
     
     height: 44px;
+    margin-bottom: 20px;
     border: none;
     border-radius: 10px;
     background-color: rgb(194, 37, 10);
@@ -164,7 +173,8 @@
     font-family: inherit;
     cursor: pointer;
 }
-.delete-user-btn:hover{
+.delete-user-btn:hover,
+.cancel-user-btn:hover{
     background-color: rgb(255, 51, 15);
 }
 
