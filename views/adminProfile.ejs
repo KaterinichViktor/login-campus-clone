@@ -43,11 +43,20 @@
                 duration: 5000,
                 close: true,
                 gravity: "top", // `top` or `bottom`
-                position: "left", // `left`, `center` or `right`
-                backgroundColor: "rgb(204, 24, 0)",
+                position: "center", // `left`, `center` or `right`
+                offset: {
+                        x: 0,
+                        y: 100
+                    },
+                style: {
+                    background: "red",
+                    fontSize: "16px",
+                    padding: "16px"
+                },
+                // backgroundColor: "rgb(204, 24, 0)",
                 stopOnFocus: true, // Prevents dismissing of toast on hover
                 onClick: function() {
-                    deleteAdmin(adminId);
+                    deleteUser(adminId);
                 }
             }).showToast();
         }
