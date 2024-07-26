@@ -5,7 +5,7 @@
     height: 44px;
     font-size: 20px;
     border-radius: 10px;
-    border: 2px solid rgb(53, 176, 162);
+    border: 2px solid var(--input-border);
     outline: none;
     font-weight: 700;
     text-align: center;
@@ -20,10 +20,10 @@
     border-radius: 10px;
     text-align: center;
 
-    color: black;
+    color: var(--black);
     font-weight: 700;
     outline: none;
-    border: 2px solid rgb(53, 176, 162);
+    border: 2px solid var(--input-border);
 }
 .user-cards-container,
 .admin-cards-container {
@@ -40,10 +40,10 @@
 }
 
 .admin-card{
-    background-color: rgba(94, 197, 171, 0.05);
+    background-color: var(--card-background);
     border-radius: 10px;
 
-    border: 1px solid #ccc;
+    border: 1px solid var(--card-border);
 
     max-width: 360px;
     padding: 30px;
@@ -59,10 +59,10 @@
   } 
 
   .user-card {
-    background-color: rgba(94, 197, 171, 0.05);
+    background-color: var(--card-background);
     border-radius: 10px;
 
-    border: 1px solid #ccc;
+    border: 1px solid var(--card-border);
     padding: 30px;
 
     max-width: 360px;
@@ -107,7 +107,7 @@
     padding: 8px;
     font-size: 20px;
 
-    border: 2px solid rgb(53, 176, 162);
+    border: 2px solid var(--input-border);
     border-radius: 10px;
     font-family: inherit;
     outline: none;

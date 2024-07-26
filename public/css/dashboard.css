@@ -27,7 +27,7 @@
     font-size: 20px;
     padding: 10px;
 
-    border: 2px solid rgb(53, 176, 162);
+    border: 2px solid var(--input-border);
     border-radius: 10px;
     font-family: inherit;
     outline: none;
@@ -45,7 +45,7 @@
     cursor: pointer;
   }
   .admin-cancel-btn:hover{
-    color: red;
+    color: var(--red);
   }
 
   .admin-safe-btn{
@@ -57,13 +57,13 @@
     font-size: 20px;
     font-family: inherit;
     border: none;
-    background-color: rgb(53, 176, 162);
+    background-color: var(--input-border);
     cursor: pointer;
-    color: white;
+    color: var(--white);
     border-radius: 10px;
   }
   .admin-safe-btn:hover{
-    background-color: rgb(39, 132, 121);
+    background-color: var(--save-hover);
 }
   .admin-delete-btn{
     position: absolute;
@@ -77,7 +77,7 @@
     cursor: pointer;
   }
   .admin-delete-btn:hover{
-    color: red;
+    color: var(--red);
   }
   
 
@@ -105,5 +105,5 @@
   }
   .user-card.add-user-card:hover,
   .admin-card.add-admin-card:hover{
-    background-color: #f0f0f0;
+    background-color: var(--card-hover);
   }

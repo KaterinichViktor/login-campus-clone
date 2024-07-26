@@ -81,7 +81,9 @@
                     </form>
                 </div>
             `;
-            addAdminButton.insertAdjacentHTML('beforebegin', newAdminForm);
+            setTimeout(() => {
+                addAdminButton.insertAdjacentHTML('beforebegin', newAdminForm);
+            }, 50);
         }
 
         function cancelNewAdmin(formId) {

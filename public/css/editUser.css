@@ -68,7 +68,7 @@
     cursor: pointer;
 }
 .delete-subject-btn:hover .fa{
-    color: red;
+    color: var(--red);
 }
 
 .delete-column,
@@ -82,9 +82,9 @@
 
 .teacher-column,
 .teacher-head{
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    border-right: 1px solid #ddd;
+    border-top: 1px solid var(--gray);
+    border-bottom: 1px solid var(--gray);
+    border-right: 1px solid var(--gray);
     
     text-align: center;
     width: 31%;
@@ -98,7 +98,7 @@
 
 .subject-head,
 .mark-head{
-    border: 1px solid #ddd;
+    border: 1px solid var(--gray);
     text-align: center;
     width: 31%;
 
@@ -115,7 +115,7 @@
 
 
 .add-subject-btn{
-    background-color: #ddd;
+    background-color: var(--gray);
     font-family: inherit;
     width: 80px;
     height: 44px;
@@ -127,20 +127,20 @@
     margin-bottom: 20px;
 }
 .add-subject-btn:hover{
-    background-color: #bebebe;
+    background-color: var(--add-sbjct-btn-hover);
 }
 
 .update-btn{
     font-family: inherit;
     
     height: 44px;
-    background-color: rgb(53, 176, 162);
+    background-color: var(--input-border);
     border: none;
     border-radius: 10px;
     cursor: pointer;
     font-size: 20px;
 
-    color: white;
+    color: var(--white);
     margin-bottom: 20px;
 
     align-self: flex-end;
@@ -148,7 +148,7 @@
 }
 
 .update-btn:hover{
-    background-color: rgb(39, 132, 121);
+    background-color: var(--save-hover);
 }
 .cancel-user-btn{
     display: flex;
@@ -167,15 +167,15 @@
     margin-bottom: 20px;
     border: none;
     border-radius: 10px;
-    background-color: rgb(194, 37, 10);
-    color: white;
+    background-color: var(--delete-user);
+    color: var(--white);
     font-size: 20px;
     font-family: inherit;
     cursor: pointer;
 }
 .delete-user-btn:hover,
 .cancel-user-btn:hover{
-    background-color: rgb(255, 51, 15);
+    background-color: var(--delete-user-hover);
 }
 
 .avg-rating-box{
@@ -184,7 +184,7 @@
 .avg-rating-box b{
     font-size: 26px;
     margin-left: 5px;
-    color: rgb(39, 132, 121);
+    color: var(--save-hover);
 }
 .avg-rating-box p{
     margin-bottom: 20px;
