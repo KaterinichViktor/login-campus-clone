@@ -5,12 +5,15 @@
     height: 44px;
     font-size: 20px;
     border-radius: 10px;
-    border: 2px solid var(--input-border);
+    border: 2px solid;
     outline: none;
     font-weight: 700;
     text-align: center;
     cursor: pointer;
+
+    background-color: transparent;
 }
+
 .students-number-input{
     width: 200px;
     height: 44px;
@@ -20,11 +23,14 @@
     border-radius: 10px;
     text-align: center;
 
-    color: var(--black);
+    background-color: transparent;
+
+    
     font-weight: 700;
     outline: none;
     border: 2px solid var(--input-border);
 }
+
 .user-cards-container,
 .admin-cards-container {
   display: flex;

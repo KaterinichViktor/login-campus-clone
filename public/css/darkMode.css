@@ -7,7 +7,7 @@
     
     --add-sbjct-btn-hover: #bebebe;
     --delete-user: rgb(194, 37, 10);
-    --delete-user-hover: rgb(255, 51, 15);
+    --delete-user-hover: rgb(121, 27, 10);
     --dropdown: #f9f9f9;
     --dropdown-hover: #f1f1f1;
     --th-background: #f2f2f2;
@@ -41,4 +41,48 @@
     --blue-stip: rgb(78, 135, 182);
 }
 
+
+
+input{
+    background-color: transparent;
+}
+
+.table-blue{
+ background-color: rgb(103,179,240);
+ color: black;
+} 
+.table-green{
+background-color: rgb(133,204,127);
+color: black;
+}
+
+.light-table{
+background-color: rgb(243,243,244);
+}
+.dark-table{
+background-color: #2d2d30;
+}
+
+
+.light-body{
+ background-color: white;
+ color: black;
+}
+.dark-body{
+    background-color: #252526;
+    color: #f5f8fa;
+}
+
+
+.light-input{
+    color: var(--black);
+}
+.dark-input{
+    color: var(--white);
+
+}
+
+.dark-sbjct-delete{
+    color: white;
+}
 

@@ -10,13 +10,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 
+
+    <!-- <link rel="stylesheet" href="/src/darkMode.js">
+
+    <script type="module">
+        import { toggleDarkMode } from '/src/darkMode.js';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('toggle-dark-mode').addEventListener('click', toggleDarkMode);
+        });
+    </script> -->
+
     <script>
         function filterByFaculty(faculty) {
             const url = new URL(window.location.href);
             url.searchParams.set('faculty', faculty);
             window.location.href = url.toString();
         }
-
 
         function filterNumericInput(event) {
             const input = event.target;
@@ -43,22 +53,14 @@
                 }
             }
         });
-
     </script>
 </head>
-<body>
+<body class="light-body">
     <header>
         <a class="main-logo" href="/">Головна</a>
-        <!-- <div class="header-profile">
-            <a href="/profile">Профіль</a>
-            <% if (isLoggedIn) { %>
-                <a href="/logout">Вийти</a>
-            <% } %>
-        </div> -->
+        <button id="toggle-dark-mode">Toggle Dark Mode</button>
+
         <div class="header-profile">
-
-            <!-- <button id="toggle-dark-mode">Toggle Dark Mode</button> -->
-
             <button class="profile-btn">Profile</button>
             <div class="dropdown-content">
                 <a href="/profile">Профіль</a>
@@ -67,15 +69,6 @@
                 <% } %>
             </div>
         </div>
-
-
-        <!-- <div class="theme-switch-wrapper">
-            <label class="theme-switch" for="checkbox">
-                <input type="checkbox" id="checkbox" />
-                <div class="slider round"></div>
-            </label>
-            <em>Enable Dark Mode!</em>
-        </div> -->
     </header>
     <div class="container">
         <h1>Рейтинг успішності</h1>
@@ -99,7 +92,6 @@
         </div>
         <% } %>
 
-        <!-- Faculty Buttons -->
         <div class="faculty-buttons">
             <% faculties.forEach(faculty => { %>
                 <button onclick="filterByFaculty('<%= faculty %>')" class="<%= selectedFaculty === faculty ? 'active' : '' %>">
@@ -107,8 +99,6 @@
                 </button>
             <% }) %> 
         </div>
-
-
 
         <div class="abomination">
             <table class="index-table">
@@ -118,21 +108,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% users.forEach((user, index) => { %>
-                        <tr class="index-row" style="background-color: 
-                            <%= index < Math.floor(budgetStudents * 0.4) ? 
-                                (index < Math.ceil(budgetStudents * 0.1) ? 'rgb(103,179,240)' : 'rgb(133,204,127)') : 'rgb(243,243,244)' %>">
-                            <td class="index-column"><%= index + 1 %></td>
-                        </tr>
-                        <% }) %>
+                    <% users.forEach((user, index) => { 
+                        let rowClass = 'light-table';
+                        if (index < Math.floor(budgetStudents * 0.4)) {
+                            rowClass = index < Math.ceil(budgetStudents * 0.1) ? 'table-blue' : 'table-green';
+                        }
+                    %>
+                    <tr class="index-row <%= rowClass %>">
+                        <td class="index-column"><%= index + 1 %></td>
+                    </tr>
+                    <% }) %>
                 </tbody>
-    
             </table>
             <div class="table-container">
                 <table class="main-table">
                     <thead class="main-table-head">
                         <tr>
-                            <!-- <th class="index-head">№</th> -->
                             <th class="pib-head">ПІБ</th>
                             <th class="faculty-head">Факультет</th>
                             <th class="group-head">Група</th> 
@@ -142,11 +133,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% users.forEach((user, index) => { %>
-                        <tr class="main-table-row" style="background-color: 
-                            <%= index < Math.floor(budgetStudents * 0.4) ? 
-                                (index < Math.ceil(budgetStudents * 0.1) ? 'rgb(103,179,240)' : 'rgb(133,204,127)') : 'rgb(243,243,244)' %>">
-                            <!-- <td class="index-column"><%= index + 1 %></td> -->
+                        <% users.forEach((user, index) => { 
+                            let rowClass = 'light-table';
+                            if (index < Math.floor(budgetStudents * 0.4)) {
+                                rowClass = index < Math.ceil(budgetStudents * 0.1) ? 'table-blue' : 'table-green';
+                            }
+                        %>
+                        <tr class="main-table-row <%= rowClass %>">
                             <td class="pib-column"><%= user.surname %> <%= user.name %> <%= user.patronymic %></td>
                             <td class="faculty-column"><%= user.faculty %></td>
                             <td class="group-column"><%= user.group %></td>

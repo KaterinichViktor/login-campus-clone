@@ -40,13 +40,15 @@
     height: 44px;
     width: 100%;
     margin-bottom: 20px;
+    padding-left: 5px;
 }
 .faculty-buttons button{
     height: 100%;
-    margin: 0;
+    margin: 0 5px 0 0;
     max-width: 200px;
     width: calc(100% / 2);
     border: 1px solid var(--white);
+    border-radius: 10px;
     background-color:var(--th-background);
     font-size: 20px;
     font-family: inherit;
@@ -166,7 +168,9 @@ th, td {
 }
 
 th {
-    background-color: var(--th-background);
+    /* background-color: var(--th-background); */
+
+    /* background-color: #2d2d30; */
     /* border: 1px solid #ddd;
     padding: 8px;
     text-align: center; */
