@@ -109,7 +109,7 @@ app.post("/updateBudget", async (req, res) => {
 
 
 app.get("/login", (req, res) => {
-    res.render("login");
+    res.render("login", { errorMessage: null });
 });
 
 app.post("/login", async (req, res) => {
@@ -138,11 +138,14 @@ app.post("/login", async (req, res) => {
             return;
         }
 
-        res.send("Invalid username or password");
+        res.render("login", { errorMessage: "Invalid username or password", username });
     } catch (error) {
         res.status(500).send("Internal Server Error");
     }
 });
+
+
+
 
 app.get("/logout", (req, res) => {
     req.session.destroy((err) => {

@@ -7,7 +7,7 @@
 .user-info-txt b{
     font-size: 24px;
     margin-left: 5px;
-    color: rgb(39, 132, 121);
+    color: var(--save-hover);
 }
 
 .sub-table{

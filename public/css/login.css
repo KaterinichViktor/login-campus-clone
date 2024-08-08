@@ -16,7 +16,7 @@
     font-size: 20px;
     margin-top: 10px;
 
-    border: 2px solid rgb(53, 176, 162);
+    border: 2px solid var(--input-border);
     border-radius: 10px;
     font-family: inherit;
     width: 100%;
@@ -26,7 +26,7 @@
 .login-input:focus{
     /* border: 3px solid rgb(33, 110, 101); */
     border: none;
-    outline: 3px solid rgb(53, 176, 162);
+    outline: 3px solid var(--input-border);
 }
 
 
@@ -44,7 +44,7 @@
     height: 44px;
     margin-top: 60px;
 
-    background-color: rgb(53, 176, 162);
+    background-color: var(--input-border);
     border: none;
     border-radius: 10px;
     cursor: pointer;
@@ -55,5 +55,18 @@
 }
 
 .login-btn:hover{
-    background-color: rgb(39, 132, 121);
+    background-color: var(--save-hover);
+}
+
+
+
+
+.error-message {
+    color: var(--red);
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.error-border {
+    border: 2px solid var(--red);
 }

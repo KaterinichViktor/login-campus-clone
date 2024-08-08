@@ -25,3 +25,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+{/* <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButton = document.getElementById('toggle-dark-mode');
+    
+    toggleButton.addEventListener('click', function() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', targetTheme);
+    });
+});
+</script> */}

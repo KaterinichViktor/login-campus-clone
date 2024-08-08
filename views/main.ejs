@@ -56,6 +56,9 @@
             <% } %>
         </div> -->
         <div class="header-profile">
+
+            <!-- <button id="toggle-dark-mode">Toggle Dark Mode</button> -->
+
             <button class="profile-btn">Profile</button>
             <div class="dropdown-content">
                 <a href="/profile">Профіль</a>
@@ -109,16 +112,16 @@
 
         <div class="abomination">
             <table class="index-table">
-                <thead>
+                <thead class="index-head">
                     <tr>
                         <th class="index-head">№</th>
                     </tr>
                 </thead>
                 <tbody>
                     <% users.forEach((user, index) => { %>
-                        <tr style="background-color: 
+                        <tr class="index-row" style="background-color: 
                             <%= index < Math.floor(budgetStudents * 0.4) ? 
-                                (index < Math.ceil(budgetStudents * 0.1) ? 'rgba(10,137,239,0.6)' : 'rgba(61,178,50,0.6)') : 'rgba(243,244,245,0.6)' %>;">
+                                (index < Math.ceil(budgetStudents * 0.1) ? 'rgb(103,179,240)' : 'rgb(133,204,127)') : 'rgb(243,243,244)' %>">
                             <td class="index-column"><%= index + 1 %></td>
                         </tr>
                         <% }) %>
@@ -127,7 +130,7 @@
             </table>
             <div class="table-container">
                 <table class="main-table">
-                    <thead>
+                    <thead class="main-table-head">
                         <tr>
                             <!-- <th class="index-head">№</th> -->
                             <th class="pib-head">ПІБ</th>
@@ -140,9 +143,9 @@
                     </thead>
                     <tbody>
                         <% users.forEach((user, index) => { %>
-                        <tr style="background-color: 
+                        <tr class="main-table-row" style="background-color: 
                             <%= index < Math.floor(budgetStudents * 0.4) ? 
-                                (index < Math.ceil(budgetStudents * 0.1) ? 'rgba(10,137,239,0.6)' : 'rgba(61,178,50,0.6)') : 'rgba(243,244,245,0.6)' %>;">
+                                (index < Math.ceil(budgetStudents * 0.1) ? 'rgb(103,179,240)' : 'rgb(133,204,127)') : 'rgb(243,243,244)' %>">
                             <!-- <td class="index-column"><%= index + 1 %></td> -->
                             <td class="pib-column"><%= user.surname %> <%= user.name %> <%= user.patronymic %></td>
                             <td class="faculty-column"><%= user.faculty %></td>

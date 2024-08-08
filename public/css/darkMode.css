@@ -1,80 +1,44 @@
-/* style.css */
+:root {
+    --input-border: rgb(53, 176, 162);
+    --card-background: rgb(247,252,251);
+    --card-hover: #f0f0f0;
+    --card-border: #ccc;
+    --save-hover: rgb(39, 132, 121);
+    
+    --add-sbjct-btn-hover: #bebebe;
+    --delete-user: rgb(194, 37, 10);
+    --delete-user-hover: rgb(255, 51, 15);
+    --dropdown: #f9f9f9;
+    --dropdown-hover: #f1f1f1;
+    --th-background: #f2f2f2;
 
-/* Base styles for light mode */
-body {
-    background-color: #ffffff;
-    color: #000000;
+    --gray: #ddd;
+    --red: red;
+    --black: black;
+    --white: white;
 }
 
-/* Toggle Switch Styles */
-.theme-switch-wrapper {
-    display: flex;
-    align-items: center;
+[data-theme="dark"] {
+    --input-border: rgb(53, 176, 162);
+    --card-background: rgb(247,252,251);
+    --card-hover: #f0f0f0;
+    --card-border: #ccc;
+    --save-hover: rgb(39, 132, 121);
+    
+    --add-sbjct-btn-hover: #bebebe;
+    --delete-user: rgb(194, 37, 10);
+    --delete-user-hover: rgb(255, 51, 15);
+    --dropdown: #f9f9f9;
+    --dropdown-hover: #f1f1f1;
+    --th-background: #f2f2f2;
+
+    --gray: #ddd;
+    --red: red;
+    --black: black;
+    --white: white;
+
+    --green-stip: rgb(100, 151, 96);
+    --blue-stip: rgb(78, 135, 182);
 }
 
-.theme-switch {
-    display: inline-block;
-    height: 34px;
-    position: relative;
-    width: 60px;
-}
 
-.theme-switch input {
-    display: none;
-}
-
-.slider {
-    background-color: #ccc;
-    bottom: 0;
-    cursor: pointer;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transition: 0.4s;
-}
-
-.slider:before {
-    background-color: #fff;
-    bottom: 4px;
-    content: "";
-    height: 26px;
-    left: 4px;
-    position: absolute;
-    transition: 0.4s;
-    width: 26px;
-}
-
-input:checked + .slider {
-    background-color: #2196F3;
-}
-
-input:checked + .slider:before {
-    transform: translateX(26px);
-}
-
-.slider.round {
-    border-radius: 34px;
-}
-
-.slider.round:before {
-    border-radius: 50%;
-}
-
-/* Dark mode styles */
-body.dark-mode {
-    background-color: #121212;
-    color: #ffffff;
-}
-
-/* Ensure other elements are properly styled for dark mode */
-.dark-mode header {
-    background-color: #333333;
-}
-
-.dark-mode .container {
-    background-color: #1e1e1e;
-    color: #ffffff;
-}
-
-/* Add any other specific dark mode styles here */

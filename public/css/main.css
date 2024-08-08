@@ -29,7 +29,7 @@
 
 .faculty-info-accent{
     font-weight: 800;
-    color: rgb(53, 176, 162);
+    color: var(--input-border);
     margin-left: 5px;
 
 }
@@ -46,8 +46,8 @@
     margin: 0;
     max-width: 200px;
     width: calc(100% / 2);
-    border: 1px solid white;
-    background-color:#f2f2f2;
+    border: 1px solid var(--white);
+    background-color:var(--th-background);
     font-size: 20px;
     font-family: inherit;
     font-weight: 600;
@@ -60,7 +60,7 @@
 }
 
 .faculty-buttons button.active{
-    background-color:rgb(53, 176, 162);
+    background-color: var(--input-border);
 }
 
 
@@ -93,19 +93,19 @@
 .students-number-btn{
     margin-left: 40px;
     box-sizing: border-box;
-    background-color: rgb(53, 176, 162);
+    background-color: var(--input-border);
     width: 100px;
     height: 44px;
     border: none;
     border-radius: 10px;
-    color: white;
+    color: var(--white);
     font-family: inherit;
     font-weight: 700;
     font-size: 20px;
     cursor: pointer;
 }
 .students-number-btn:hover{
-    background-color: rgb(39, 132, 121);
+    background-color: var(--save-hover);
 }
 
 
@@ -118,9 +118,9 @@ th, td {
 
 .pib-column,
 .pib-head{
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    border-right: 1px solid #ddd;
+    border-top: 1px solid var(--gray);
+    border-bottom: 1px solid var(--gray);
+    border-right: 1px solid var(--gray);
     padding: 8px;
     white-space:nowrap;
 
@@ -140,7 +140,7 @@ th, td {
 .add-head,
 .rating-head,
 .faculty-head{
-    border: 1px solid #ddd;
+    border: 1px solid var(--gray);
     padding: 8px;
     text-align: center;
     white-space:nowrap;
@@ -166,7 +166,7 @@ th, td {
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: var(--th-background);
     /* border: 1px solid #ddd;
     padding: 8px;
     text-align: center; */
